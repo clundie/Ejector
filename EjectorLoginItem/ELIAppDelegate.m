@@ -8,8 +8,11 @@
 
 #import "ELIAppDelegate.h"
 #import "ELIStatusItem.h"
+#import "ELIParentApp.h"
 
 @interface ELIAppDelegate ()
+
+- (IBAction)openParentApp:(id)sender;
 
 @property (nonatomic) ELIStatusItem *statusItem;
 
@@ -24,6 +27,11 @@
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
+}
+
+- (IBAction)openParentApp:(id)sender
+{
+  [ELIParentApp open];
 }
 
 @end

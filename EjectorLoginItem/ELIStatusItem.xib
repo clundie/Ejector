@@ -13,10 +13,10 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu id="D0n-B2-pEO" userLabel="Status Menu">
             <items>
-                <menuItem title="Quit" id="x4O-sG-Au9" userLabel="Quit">
+                <menuItem title="Open Ejector Preferences…" id="H4n-4c-SIP">
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <connections>
-                        <action selector="terminate:" target="-1" id="phA-Ui-8ly"/>
+                        <action selector="openParentApp:" target="-1" id="VNn-Jf-MgL"/>
                     </connections>
                 </menuItem>
             </items>
