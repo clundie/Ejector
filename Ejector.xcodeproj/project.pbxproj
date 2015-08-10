@@ -10,6 +10,8 @@
 		8312CD701B7922EA008F78BC /* ELIStatusItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8312CD6F1B7922EA008F78BC /* ELIStatusItem.xib */; };
 		8312CD731B7924A5008F78BC /* ELIStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD721B7924A5008F78BC /* ELIStatusItem.m */; };
 		8312CD761B793EA8008F78BC /* ELIParentApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD751B793EA8008F78BC /* ELIParentApp.m */; };
+		8312CD791B79462B008F78BC /* EJELoginItemEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */; };
+		8312CD7E1B794E03008F78BC /* NSObject+CDLKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */; };
 		837E0FB61B76797700A18CD7 /* EJEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FB51B76797700A18CD7 /* EJEAppDelegate.m */; };
 		837E0FB81B76797700A18CD7 /* EJEMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FB71B76797700A18CD7 /* EJEMain.m */; };
 		837E0FBB1B76797700A18CD7 /* EJEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FBA1B76797700A18CD7 /* EJEViewController.m */; };
@@ -67,6 +69,10 @@
 		8312CD721B7924A5008F78BC /* ELIStatusItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIStatusItem.m; sourceTree = "<group>"; };
 		8312CD741B793EA8008F78BC /* ELIParentApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIParentApp.h; sourceTree = "<group>"; };
 		8312CD751B793EA8008F78BC /* ELIParentApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIParentApp.m; sourceTree = "<group>"; };
+		8312CD771B79462B008F78BC /* EJELoginItemEnabler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJELoginItemEnabler.h; sourceTree = "<group>"; };
+		8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJELoginItemEnabler.m; sourceTree = "<group>"; };
+		8312CD7C1B794E03008F78BC /* NSObject+CDLKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CDLKVO.h"; sourceTree = "<group>"; };
+		8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CDLKVO.m"; sourceTree = "<group>"; };
 		837E0FAF1B76797700A18CD7 /* Ejector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ejector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		837E0FB31B76797700A18CD7 /* EJEInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EJEInfo.plist; sourceTree = "<group>"; };
 		837E0FB41B76797700A18CD7 /* EJEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EJEAppDelegate.h; sourceTree = "<group>"; };
@@ -125,9 +131,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8312CD7B1B794D9E008F78BC /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8312CD7C1B794E03008F78BC /* NSObject+CDLKVO.h */,
+				8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
 		837E0FA61B76797700A18CD7 = {
 			isa = PBXGroup;
 			children = (
+				8312CD7B1B794D9E008F78BC /* Shared */,
 				837E0FB11B76797700A18CD7 /* Ejector */,
 				837E0FC81B76797700A18CD7 /* EjectorTests */,
 				83DBDB181B7799D000419543 /* EjectorLoginItem */,
@@ -159,6 +175,8 @@
 				837E0FBC1B76797700A18CD7 /* EJEImages.xcassets */,
 				837E0FBE1B76797700A18CD7 /* EJEMain.storyboard */,
 				837E0FB21B76797700A18CD7 /* Supporting Files */,
+				8312CD771B79462B008F78BC /* EJELoginItemEnabler.h */,
+				8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */,
 			);
 			path = Ejector;
 			sourceTree = "<group>";
@@ -408,6 +426,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				837E0FBB1B76797700A18CD7 /* EJEViewController.m in Sources */,
+				8312CD791B79462B008F78BC /* EJELoginItemEnabler.m in Sources */,
+				8312CD7E1B794E03008F78BC /* NSObject+CDLKVO.m in Sources */,
 				837E0FB81B76797700A18CD7 /* EJEMain.m in Sources */,
 				837E0FB61B76797700A18CD7 /* EJEAppDelegate.m in Sources */,
 			);

@@ -7,9 +7,9 @@
 //
 
 #import "EJEAppDelegate.h"
+#import "EJELoginItemEnabler.h"
 #import <stdio.h>
 @import DiskArbitration;
-@import ServiceManagement;
 
 static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void * context);
 static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void * context);
@@ -27,14 +27,15 @@ static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void * conte
 
 @interface EJEAppDelegate ()
 
+@property EJELoginItemEnabler *loginItemEnabler;
+
 @end
 
 @implementation EJEAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  SMLoginItemSetEnabled(CFSTR("ca.lundie.EjectorLoginItem"), false);
-  SMLoginItemSetEnabled(CFSTR("ca.lundie.EjectorLoginItem"), true);
+  self.loginItemEnabler = [[[EJELoginItemEnabler alloc] init] watchUserDefaults];
   NSArray *resourceKeys = @[NSURLEffectiveIconKey, NSURLLocalizedNameKey, NSURLNameKey];
   NSFileManager *manager = [NSFileManager defaultManager];
   NSURL *oldVolumeURL = nil;

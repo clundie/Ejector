@@ -705,11 +705,27 @@
                                     <binding destination="tTB-Yo-toE" name="value" keyPath="values.ScheduledTime" id="vRg-no-Qsm"/>
                                 </connections>
                             </datePicker>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="5Sv-Sq-cb2">
+                                <rect key="frame" x="196" y="18" width="88" height="18"/>
+                                <buttonCell key="cell" type="check" title="Login Item" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="h5I-2e-AiD">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="tTB-Yo-toE" name="value" keyPath="values.LoginItemEnabled" id="f74-mb-BVW">
+                                        <dictionary key="options">
+                                            <integer key="NSNullPlaceholder" value="0"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="centerX" secondItem="abn-7v-gCM" secondAttribute="centerX" id="6Lh-e9-nTn"/>
+                            <constraint firstAttribute="centerX" secondItem="5Sv-Sq-cb2" secondAttribute="centerX" id="Ttn-40-Gj4"/>
                             <constraint firstAttribute="centerX" secondItem="duY-70-pEr" secondAttribute="centerX" id="Wx1-4W-CTl"/>
                             <constraint firstItem="abn-7v-gCM" firstAttribute="leading" secondItem="duY-70-pEr" secondAttribute="leading" id="hd6-Uq-W1d"/>
+                            <constraint firstAttribute="bottom" secondItem="5Sv-Sq-cb2" secondAttribute="bottom" constant="20" id="oAc-SA-vFb"/>
                             <constraint firstAttribute="centerY" secondItem="duY-70-pEr" secondAttribute="centerY" constant="-64" id="v3R-W7-JmL"/>
                             <constraint firstAttribute="centerY" secondItem="abn-7v-gCM" secondAttribute="centerY" constant="15" id="vHI-qG-Ahk"/>
                         </constraints>
