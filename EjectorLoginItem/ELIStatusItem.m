@@ -24,7 +24,7 @@
   if (self.statusItem) {
     return self;
   }
-  [[NSBundle mainBundle] loadNibNamed:@"ELIStatusItem" owner:self topLevelObjects:NULL];
+  NSAssert([[NSBundle mainBundle] loadNibNamed:@"ELIStatusItem" owner:self topLevelObjects:NULL], @"Load nib ELIStatusItem");
   NSStatusBar *statusBar = [NSStatusBar systemStatusBar];
   NSStatusItem *statusItem = [statusBar statusItemWithLength:NSVariableStatusItemLength];
   self.statusItem = statusItem;
