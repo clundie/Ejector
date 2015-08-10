@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		8312CD701B7922EA008F78BC /* ELIStatusItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8312CD6F1B7922EA008F78BC /* ELIStatusItem.xib */; };
 		8312CD731B7924A5008F78BC /* ELIStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD721B7924A5008F78BC /* ELIStatusItem.m */; };
+		8312CD761B793EA8008F78BC /* ELIParentApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD751B793EA8008F78BC /* ELIParentApp.m */; };
 		837E0FB61B76797700A18CD7 /* EJEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FB51B76797700A18CD7 /* EJEAppDelegate.m */; };
 		837E0FB81B76797700A18CD7 /* EJEMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FB71B76797700A18CD7 /* EJEMain.m */; };
 		837E0FBB1B76797700A18CD7 /* EJEViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FBA1B76797700A18CD7 /* EJEViewController.m */; };
@@ -64,6 +65,8 @@
 		8312CD6F1B7922EA008F78BC /* ELIStatusItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELIStatusItem.xib; sourceTree = "<group>"; };
 		8312CD711B7924A5008F78BC /* ELIStatusItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIStatusItem.h; sourceTree = "<group>"; };
 		8312CD721B7924A5008F78BC /* ELIStatusItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIStatusItem.m; sourceTree = "<group>"; };
+		8312CD741B793EA8008F78BC /* ELIParentApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIParentApp.h; sourceTree = "<group>"; };
+		8312CD751B793EA8008F78BC /* ELIParentApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIParentApp.m; sourceTree = "<group>"; };
 		837E0FAF1B76797700A18CD7 /* Ejector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ejector.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		837E0FB31B76797700A18CD7 /* EJEInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EJEInfo.plist; sourceTree = "<group>"; };
 		837E0FB41B76797700A18CD7 /* EJEAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EJEAppDelegate.h; sourceTree = "<group>"; };
@@ -198,6 +201,8 @@
 				8312CD6F1B7922EA008F78BC /* ELIStatusItem.xib */,
 				8312CD711B7924A5008F78BC /* ELIStatusItem.h */,
 				8312CD721B7924A5008F78BC /* ELIStatusItem.m */,
+				8312CD741B793EA8008F78BC /* ELIParentApp.h */,
+				8312CD751B793EA8008F78BC /* ELIParentApp.m */,
 			);
 			path = EjectorLoginItem;
 			sourceTree = "<group>";
@@ -422,6 +427,7 @@
 			files = (
 				8312CD731B7924A5008F78BC /* ELIStatusItem.m in Sources */,
 				83DBDB1F1B7799D000419543 /* ELIMain.m in Sources */,
+				8312CD761B793EA8008F78BC /* ELIParentApp.m in Sources */,
 				83DBDB1D1B7799D000419543 /* ELIAppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
