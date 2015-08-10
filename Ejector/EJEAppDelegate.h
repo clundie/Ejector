@@ -1,15 +1,13 @@
 //
-//  AppDelegate.h
+//  EJEAppDelegate.h
 //  Ejector
 //
 //  Created by Chris Lundie on 08/Aug/2015.
 //  Copyright (c) 2015 Chris Lundie. All rights reserved.
 //
 
-#import <Cocoa/Cocoa.h>
+@import Cocoa;
 
-@interface AppDelegate : NSObject <NSApplicationDelegate>
-
+@interface EJEAppDelegate : NSObject <NSApplicationDelegate>
 
 @end
-
