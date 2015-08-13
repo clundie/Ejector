@@ -105,8 +105,9 @@ cleanup:
   }
 }
 
-- (void)applicationWillTerminate:(NSNotification *)aNotification
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)sender
 {
+  return YES;
 }
 
 @end
