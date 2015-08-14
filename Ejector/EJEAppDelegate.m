@@ -8,6 +8,7 @@
 
 #import "EJEAppDelegate.h"
 #import "EJELoginItemEnabler.h"
+#import "EJESettingsSaver.h"
 #import <stdio.h>
 @import DiskArbitration;
 
@@ -28,6 +29,7 @@ static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void * conte
 @interface EJEAppDelegate ()
 
 @property EJELoginItemEnabler *loginItemEnabler;
+@property EJESettingsSaver *settingsSaver;
 
 @end
 
@@ -36,6 +38,7 @@ static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void * conte
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
   self.loginItemEnabler = [[[EJELoginItemEnabler alloc] init] watchUserDefaults];
+  self.settingsSaver = [[[EJESettingsSaver alloc] init] watchUserDefaults];
   NSArray *resourceKeys = @[NSURLEffectiveIconKey, NSURLLocalizedNameKey, NSURLNameKey];
   NSFileManager *manager = [NSFileManager defaultManager];
   NSURL *oldVolumeURL = nil;

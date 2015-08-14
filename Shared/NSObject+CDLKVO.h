@@ -9,11 +9,11 @@
 
 @class CDLKVOObserver;
 
-typedef void(^CDLKVOObserverBlock)(NSDictionary *change);
+typedef void(^CDLKVOObserverBlock)(NSString *keyPath, NSDictionary *change);
 
 @interface NSObject (CDLKVO)
 
-- (CDLKVOObserver *)cdl_observeKeyPath:(NSString *)path options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block;
+- (CDLKVOObserver *)cdl_observeKeyPaths:(NSArray *)paths options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block;
 
 @end
 

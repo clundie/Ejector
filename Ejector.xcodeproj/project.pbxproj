@@ -18,6 +18,13 @@
 		837E0FBD1B76797700A18CD7 /* EJEImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 837E0FBC1B76797700A18CD7 /* EJEImages.xcassets */; };
 		837E0FC01B76797700A18CD7 /* EJEMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837E0FBE1B76797700A18CD7 /* EJEMain.storyboard */; };
 		837E0FCC1B76797700A18CD7 /* EJETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FCB1B76797700A18CD7 /* EJETests.m */; };
+		83A08F101B7D5F320096BA90 /* CDLSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A08F0F1B7D5F320096BA90 /* CDLSchedule.m */; };
+		83A08F111B7D5F320096BA90 /* CDLSchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A08F0F1B7D5F320096BA90 /* CDLSchedule.m */; };
+		83A08F181B7D62BF0096BA90 /* CDLSchedule+Writer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A08F171B7D62BF0096BA90 /* CDLSchedule+Writer.m */; };
+		83A08F1A1B7D67E00096BA90 /* CDLFileContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A08F191B7D67E00096BA90 /* CDLFileContainer.m */; };
+		83A08F1B1B7D67E00096BA90 /* CDLFileContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A08F191B7D67E00096BA90 /* CDLFileContainer.m */; };
+		83A08F1F1B7D750E0096BA90 /* EJESettingsSaver.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A08F1E1B7D750E0096BA90 /* EJESettingsSaver.m */; };
+		83A08F201B7D7C5E0096BA90 /* CDLSchedule+Reader.m in Sources */ = {isa = PBXBuildFile; fileRef = 83A08F131B7D62AD0096BA90 /* CDLSchedule+Reader.m */; };
 		83DBDB1D1B7799D000419543 /* ELIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBDB1C1B7799D000419543 /* ELIAppDelegate.m */; };
 		83DBDB1F1B7799D000419543 /* ELIMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBDB1E1B7799D000419543 /* ELIMain.m */; };
 		83DBDB211B7799D000419543 /* ELIImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83DBDB201B7799D000419543 /* ELIImages.xcassets */; };
@@ -86,6 +93,16 @@
 		837E0FCA1B76797700A18CD7 /* EJETestsInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EJETestsInfo.plist; sourceTree = "<group>"; };
 		837E0FCB1B76797700A18CD7 /* EJETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EJETests.m; sourceTree = "<group>"; };
 		837E0FD51B767A8600A18CD7 /* Ejector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Ejector.entitlements; sourceTree = "<group>"; };
+		83A08F0E1B7D5F320096BA90 /* CDLSchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDLSchedule.h; sourceTree = "<group>"; };
+		83A08F0F1B7D5F320096BA90 /* CDLSchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLSchedule.m; sourceTree = "<group>"; };
+		83A08F121B7D62AD0096BA90 /* CDLSchedule+Reader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CDLSchedule+Reader.h"; sourceTree = "<group>"; };
+		83A08F131B7D62AD0096BA90 /* CDLSchedule+Reader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CDLSchedule+Reader.m"; sourceTree = "<group>"; };
+		83A08F161B7D62BF0096BA90 /* CDLSchedule+Writer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CDLSchedule+Writer.h"; sourceTree = "<group>"; };
+		83A08F171B7D62BF0096BA90 /* CDLSchedule+Writer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CDLSchedule+Writer.m"; sourceTree = "<group>"; };
+		83A08F191B7D67E00096BA90 /* CDLFileContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CDLFileContainer.m; sourceTree = "<group>"; };
+		83A08F1C1B7D67F90096BA90 /* CDLFileContainer.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CDLFileContainer.h; sourceTree = "<group>"; };
+		83A08F1D1B7D750E0096BA90 /* EJESettingsSaver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJESettingsSaver.h; sourceTree = "<group>"; };
+		83A08F1E1B7D750E0096BA90 /* EJESettingsSaver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJESettingsSaver.m; sourceTree = "<group>"; };
 		83DBDB171B7799D000419543 /* EjectorLoginItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EjectorLoginItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DBDB1A1B7799D000419543 /* ELIInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ELIInfo.plist; sourceTree = "<group>"; };
 		83DBDB1B1B7799D000419543 /* ELIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELIAppDelegate.h; sourceTree = "<group>"; };
@@ -136,6 +153,14 @@
 			children = (
 				8312CD7C1B794E03008F78BC /* NSObject+CDLKVO.h */,
 				8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */,
+				83A08F0E1B7D5F320096BA90 /* CDLSchedule.h */,
+				83A08F0F1B7D5F320096BA90 /* CDLSchedule.m */,
+				83A08F121B7D62AD0096BA90 /* CDLSchedule+Reader.h */,
+				83A08F131B7D62AD0096BA90 /* CDLSchedule+Reader.m */,
+				83A08F161B7D62BF0096BA90 /* CDLSchedule+Writer.h */,
+				83A08F171B7D62BF0096BA90 /* CDLSchedule+Writer.m */,
+				83A08F1C1B7D67F90096BA90 /* CDLFileContainer.h */,
+				83A08F191B7D67E00096BA90 /* CDLFileContainer.m */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -177,6 +202,8 @@
 				837E0FB21B76797700A18CD7 /* Supporting Files */,
 				8312CD771B79462B008F78BC /* EJELoginItemEnabler.h */,
 				8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */,
+				83A08F1D1B7D750E0096BA90 /* EJESettingsSaver.h */,
+				83A08F1E1B7D750E0096BA90 /* EJESettingsSaver.m */,
 			);
 			path = Ejector;
 			sourceTree = "<group>";
@@ -339,6 +366,9 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = LFZPMJ2CPK;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
 								enabled = 1;
 							};
@@ -352,6 +382,9 @@
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = LFZPMJ2CPK;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 1;
+							};
 							com.apple.Sandbox = {
 								enabled = 1;
 							};
@@ -425,11 +458,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83A08F101B7D5F320096BA90 /* CDLSchedule.m in Sources */,
+				83A08F1F1B7D750E0096BA90 /* EJESettingsSaver.m in Sources */,
 				837E0FBB1B76797700A18CD7 /* EJEViewController.m in Sources */,
 				8312CD791B79462B008F78BC /* EJELoginItemEnabler.m in Sources */,
 				8312CD7E1B794E03008F78BC /* NSObject+CDLKVO.m in Sources */,
+				83A08F1A1B7D67E00096BA90 /* CDLFileContainer.m in Sources */,
 				837E0FB81B76797700A18CD7 /* EJEMain.m in Sources */,
 				837E0FB61B76797700A18CD7 /* EJEAppDelegate.m in Sources */,
+				83A08F181B7D62BF0096BA90 /* CDLSchedule+Writer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -446,9 +483,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				8312CD731B7924A5008F78BC /* ELIStatusItem.m in Sources */,
+				83A08F1B1B7D67E00096BA90 /* CDLFileContainer.m in Sources */,
 				83DBDB1F1B7799D000419543 /* ELIMain.m in Sources */,
 				8312CD761B793EA8008F78BC /* ELIParentApp.m in Sources */,
 				83DBDB1D1B7799D000419543 /* ELIAppDelegate.m in Sources */,
+				83A08F201B7D7C5E0096BA90 /* CDLSchedule+Reader.m in Sources */,
+				83A08F111B7D5F320096BA90 /* CDLSchedule.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -633,6 +673,7 @@
 				INFOPLIST_FILE = Ejector/EJEInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
 			};
 			name = Debug;
 		};
@@ -646,6 +687,7 @@
 				INFOPLIST_FILE = Ejector/EJEInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
 			};
 			name = Release;
 		};
@@ -695,6 +737,7 @@
 				INFOPLIST_FILE = EjectorLoginItem/ELIInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
 			};
 			name = Debug;
 		};
@@ -708,6 +751,7 @@
 				INFOPLIST_FILE = EjectorLoginItem/ELIInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
 			};
 			name = Release;
 		};

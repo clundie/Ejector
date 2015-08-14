@@ -9,6 +9,7 @@
 #import "ELIAppDelegate.h"
 #import "ELIStatusItem.h"
 #import "ELIParentApp.h"
+#import "../Shared/CDLSchedule+Reader.h"
 
 @interface ELIAppDelegate ()
 
@@ -23,6 +24,8 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
   self.statusItem = [[[ELIStatusItem alloc] init] show];
+  CDLSchedule *schedule = [CDLSchedule scheduleWithSharedStorage];
+  NSLog(@"%s schedule.date=%@", __PRETTY_FUNCTION__, schedule.date);
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification

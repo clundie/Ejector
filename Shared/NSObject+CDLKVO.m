@@ -9,27 +9,34 @@
 
 @interface CDLKVOObserver ()
 
-- (instancetype)initWithKeyPath:(NSString *)path options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block object:(NSObject *)object NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithKeyPaths:(NSArray *)paths options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block object:(NSObject *)object NS_DESIGNATED_INITIALIZER;
 
 @property (nonatomic, copy) CDLKVOObserverBlock observerBlock;
 @property (nonatomic, weak) NSObject *observedObject;
-@property (nonatomic, copy) NSString *keyPath;
+@property (nonatomic, copy) NSArray *keyPaths;
 
 @end
 
 @implementation CDLKVOObserver
 
-- (instancetype)initWithKeyPath:(NSString *)path options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block object:(NSObject *)object
+- (instancetype)initWithKeyPaths:(NSArray *)paths options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block object:(NSObject *)object
 {
-  NSAssert([path length] > 0, @"path is empty");
+  NSAssert([paths count] > 0, @"path is empty");
+#if !defined(NS_BLOCK_ASSERTIONS)
+  for (NSString *path in paths) {
+    NSAssert([path length] > 0, @"path is empty");
+  }
+#endif
   NSAssert(block != nil, @"block is nil");
   NSAssert(object != nil, @"object is nil");
   self = [super init];
   if (self) {
     self.observerBlock = block;
     self.observedObject = object;
-    self.keyPath = path;
-    [object addObserver:self forKeyPath:path options:options context:NULL];
+    self.keyPaths = paths;
+    for (NSString *path in paths) {
+      [object addObserver:self forKeyPath:path options:options context:NULL];
+    }
   }
   return self;
 }
@@ -44,15 +51,17 @@
   id observedObject = self.observedObject;
   if (observedObject) {
     self.observedObject = nil;
-    [observedObject removeObserver:self forKeyPath:self.keyPath];
+    for (NSString *path in self.keyPaths) {
+      [observedObject removeObserver:self forKeyPath:path];
+    }
     self.observerBlock = nil;
-    self.keyPath = nil;
+    self.keyPaths = nil;
   }
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
-  self.observerBlock(change);
+  self.observerBlock(keyPath, change);
 }
 
 @end
@@ -63,7 +72,19 @@
 {
   NSAssert([path length] > 0, @"path is empty");
   NSAssert(block != nil, @"block is nil");
-  return [[CDLKVOObserver alloc] initWithKeyPath:path options:options block:block object:self];
+  return [[CDLKVOObserver alloc] initWithKeyPaths:@[path] options:options block:block object:self];
+}
+
+- (CDLKVOObserver *)cdl_observeKeyPaths:(NSArray *)paths options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block
+{
+  NSAssert([paths count] > 0, @"paths is empty");
+  NSAssert(block != nil, @"block is nil");
+#if !defined(NS_BLOCK_ASSERTIONS)
+  for (NSString *path in paths) {
+    NSAssert([path length] > 0, @"path is empty");
+  }
+#endif
+  return [[CDLKVOObserver alloc] initWithKeyPaths:paths options:options block:block object:self];
 }
 
 @end

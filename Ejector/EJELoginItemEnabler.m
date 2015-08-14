@@ -23,7 +23,7 @@
 - (instancetype)watchUserDefaults
 {
   static NSString * const keyPath = @"values.LoginItemEnabled";
-  self.observer = [[NSUserDefaultsController sharedUserDefaultsController] cdl_observeKeyPath:keyPath options:0 block:^(NSDictionary *change) {
+  self.observer = [[NSUserDefaultsController sharedUserDefaultsController] cdl_observeKeyPaths:@[keyPath] options:0 block:^(NSString *_, NSDictionary *change) {
     id value = [[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:keyPath];
     BOOL loginItemEnabled = [value isKindOfClass:[NSNumber class]] ? [value boolValue] : NO;
     NSLog(@"%s loginItemEnabled=%@", __PRETTY_FUNCTION__, @(loginItemEnabled));
