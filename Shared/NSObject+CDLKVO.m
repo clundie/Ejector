@@ -9,8 +9,6 @@
 
 @interface CDLKVOObserver ()
 
-- (instancetype)initWithKeyPaths:(NSArray *)paths options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block object:(NSObject *)object NS_DESIGNATED_INITIALIZER;
-
 @property (nonatomic, copy) CDLKVOObserverBlock observerBlock;
 @property (nonatomic, weak) NSObject *observedObject;
 @property (nonatomic, copy) NSArray *keyPaths;
@@ -19,7 +17,7 @@
 
 @implementation CDLKVOObserver
 
-- (instancetype)initWithKeyPaths:(NSArray *)paths options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block object:(NSObject *)object
+- (instancetype)initWithKeyPaths:(nonnull NSArray<NSString *> *)paths options:(NSKeyValueObservingOptions)options block:(nonnull CDLKVOObserverBlock)block object:(nonnull NSObject *)object
 {
   NSAssert([paths count] > 0, @"path is empty");
 #if !defined(NS_BLOCK_ASSERTIONS)
@@ -59,7 +57,7 @@
   }
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+- (void)observeValueForKeyPath:(nullable NSString *)keyPath ofObject:(nullable id)object change:(nullable NSDictionary<NSString *,id> *)change context:(nullable void *)context
 {
   self.observerBlock(keyPath, change);
 }
@@ -68,14 +66,14 @@
 
 @implementation NSObject (CDLKVO)
 
-- (CDLKVOObserver *)cdl_observeKeyPath:(NSString *)path options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block
+- (nonnull CDLKVOObserver *)cdl_observeKeyPath:(nonnull NSString *)path options:(NSKeyValueObservingOptions)options block:(nonnull CDLKVOObserverBlock)block
 {
   NSAssert([path length] > 0, @"path is empty");
   NSAssert(block != nil, @"block is nil");
   return [[CDLKVOObserver alloc] initWithKeyPaths:@[path] options:options block:block object:self];
 }
 
-- (CDLKVOObserver *)cdl_observeKeyPaths:(NSArray *)paths options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block
+- (nonnull CDLKVOObserver *)cdl_observeKeyPaths:(nonnull NSArray<NSString *> *)paths options:(NSKeyValueObservingOptions)options block:(nonnull CDLKVOObserverBlock)block
 {
   NSAssert([paths count] > 0, @"paths is empty");
   NSAssert(block != nil, @"block is nil");

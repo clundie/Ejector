@@ -17,7 +17,7 @@
   NSURL *parentAppBundleURL = [[NSURL alloc] initWithString:@"../../../.." relativeToURL:[[NSBundle mainBundle] bundleURL]];
   NSAssert(parentAppBundleURL != nil, @"parentAppBundleURL is nil");
   NSError *error = nil;
-  [[NSWorkspace sharedWorkspace] launchApplicationAtURL:parentAppBundleURL options:NSWorkspaceLaunchDefault configuration:nil error:&error];
+  [[NSWorkspace sharedWorkspace] launchApplicationAtURL:parentAppBundleURL options:NSWorkspaceLaunchDefault configuration:@{} error:&error];
 }
 
 @end

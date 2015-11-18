@@ -12,7 +12,7 @@
 
 @interface CDLSchedule : NSObject <NSSecureCoding, NSCopying>
 
-- (instancetype)initWithDate:(NSDate *)date bookmarks:(NSArray *)bookmarks NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithDate:(NSDate *)date bookmarks:(NSArray *)bookmarks;
 
 @property (copy, readonly) NSDate *date;
 @property (copy, readonly) NSArray *bookmarks;

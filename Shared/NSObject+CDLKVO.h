@@ -9,11 +9,11 @@
 
 @class CDLKVOObserver;
 
-typedef void(^CDLKVOObserverBlock)(NSString *keyPath, NSDictionary *change);
+typedef void(^CDLKVOObserverBlock)(NSString * _Nullable keyPath, NSDictionary<NSString *, id> * _Nullable change);
 
 @interface NSObject (CDLKVO)
 
-- (CDLKVOObserver *)cdl_observeKeyPaths:(NSArray *)paths options:(NSKeyValueObservingOptions)options block:(CDLKVOObserverBlock)block;
+- (nonnull CDLKVOObserver *)cdl_observeKeyPaths:(nonnull NSArray<NSString *> *)paths options:(NSKeyValueObservingOptions)options block:(nonnull CDLKVOObserverBlock)block;
 
 @end
 
