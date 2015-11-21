@@ -7,8 +7,20 @@
 //
 
 #import "EJEViewController.h"
+#import "../Shared/NSUserDefaultsController+EJESuite.h"
+
+@interface EJEViewController ()
+
+@property (readonly) IBOutlet NSUserDefaultsController *defaultsSuiteController;
+
+@end
 
 @implementation EJEViewController
+
+- (NSUserDefaultsController *)defaultsSuiteController
+{
+  return [NSUserDefaultsController eje_sharedSuite];
+}
 
 - (void)viewDidLoad
 {

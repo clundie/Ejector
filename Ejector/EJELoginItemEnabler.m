@@ -8,13 +8,14 @@
 
 #import "EJELoginItemEnabler.h"
 #import "../Shared/NSObject+CDLKVO.h"
+#import "../Shared/NSUserDefaultsController+EJESuite.h"
 
 @import Cocoa;
 @import ServiceManagement;
 
 @interface EJELoginItemEnabler()
 
-@property (nonatomic) CDLKVOObserver *observer;
+@property (copy) NSArray<CDLKVOObserver *>*observers;
 
 @end
 
@@ -22,12 +23,21 @@
 
 - (instancetype)watchUserDefaults
 {
-  static NSString * const keyPath = @"values.LoginItemEnabled";
-  self.observer = [[NSUserDefaultsController sharedUserDefaultsController] cdl_observeKeyPaths:@[keyPath] options:0 block:^(NSString *_, NSDictionary *change) {
-    id value = [[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:keyPath];
-    BOOL loginItemEnabled = [value isKindOfClass:[NSNumber class]] ? [value boolValue] : NO;
-    SMLoginItemSetEnabled(CFSTR("ca.lundie.EjectorLoginItem"), loginItemEnabled ? true : false);
-  }];
+  NSUserDefaultsController *controller = [NSUserDefaultsController eje_sharedSuite];
+  self.observers = @[
+    [controller cdl_observeKeyPaths:@[@"values.LoginItemEnabled",] options:0 block:^(NSString * _Nullable _, NSDictionary<NSString *,id> * _Nullable change) {
+      id value = [controller valueForKeyPath:@"values.LoginItemEnabled"];
+      NSLog(@"%@", value);
+      BOOL loginItemEnabled = [value isKindOfClass:[NSNumber class]] ? [value boolValue] : NO;
+      [[controller defaults] synchronize];
+      SMLoginItemSetEnabled(CFSTR("ca.lundie.EjectorLoginItem"), loginItemEnabled ? true : false);
+    }],
+
+    [controller cdl_observeKeyPaths:@[@"values.Foo", @"values.LoginItemEnabled",] options:0 block:^(NSString * _Nullable _, NSDictionary<NSString *,id> * _Nullable change) {
+      [[controller defaults] synchronize];
+      [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"ca.lundie.Ejector.DefaultsChanged" object:@"ca.lundie.Ejector"];
+    }],
+  ];
   return self;
 }
 

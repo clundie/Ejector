@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		8312CD791B79462B008F78BC /* EJELoginItemEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */; };
 		8312CD7E1B794E03008F78BC /* NSObject+CDLKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */; };
+		83692B001C000AB000F509D5 /* NSUserDefaultsController+EJESuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 83692AFF1C000AB000F509D5 /* NSUserDefaultsController+EJESuite.m */; };
+		83692B021C000FC300F509D5 /* NSObject+CDLKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */; };
+		83692B051C00159400F509D5 /* NSUserDefaults+EJESuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 83692B041C00159400F509D5 /* NSUserDefaults+EJESuite.m */; };
+		83692B061C00159400F509D5 /* NSUserDefaults+EJESuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 83692B041C00159400F509D5 /* NSUserDefaults+EJESuite.m */; };
 		8379B8CD1BFD761600977293 /* ELIEjectorWorker.m in Sources */ = {isa = PBXBuildFile; fileRef = 8379B8CC1BFD761600977293 /* ELIEjectorWorker.m */; };
 		837E0FB61B76797700A18CD7 /* EJEAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FB51B76797700A18CD7 /* EJEAppDelegate.m */; };
 		837E0FB81B76797700A18CD7 /* EJEMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FB71B76797700A18CD7 /* EJEMain.m */; };
@@ -66,6 +70,10 @@
 		8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJELoginItemEnabler.m; sourceTree = "<group>"; };
 		8312CD7C1B794E03008F78BC /* NSObject+CDLKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CDLKVO.h"; sourceTree = "<group>"; };
 		8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CDLKVO.m"; sourceTree = "<group>"; };
+		83692AFE1C000AB000F509D5 /* NSUserDefaultsController+EJESuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaultsController+EJESuite.h"; sourceTree = "<group>"; };
+		83692AFF1C000AB000F509D5 /* NSUserDefaultsController+EJESuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaultsController+EJESuite.m"; sourceTree = "<group>"; };
+		83692B031C00159400F509D5 /* NSUserDefaults+EJESuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+EJESuite.h"; sourceTree = "<group>"; };
+		83692B041C00159400F509D5 /* NSUserDefaults+EJESuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+EJESuite.m"; sourceTree = "<group>"; };
 		8379B8CB1BFD761600977293 /* ELIEjectorWorker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIEjectorWorker.h; sourceTree = "<group>"; };
 		8379B8CC1BFD761600977293 /* ELIEjectorWorker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIEjectorWorker.m; sourceTree = "<group>"; };
 		837E0FAF1B76797700A18CD7 /* Ejector.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Ejector.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -131,6 +139,10 @@
 			children = (
 				8312CD7C1B794E03008F78BC /* NSObject+CDLKVO.h */,
 				8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */,
+				83692AFE1C000AB000F509D5 /* NSUserDefaultsController+EJESuite.h */,
+				83692AFF1C000AB000F509D5 /* NSUserDefaultsController+EJESuite.m */,
+				83692B031C00159400F509D5 /* NSUserDefaults+EJESuite.h */,
+				83692B041C00159400F509D5 /* NSUserDefaults+EJESuite.m */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -424,8 +436,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				837E0FBB1B76797700A18CD7 /* EJEViewController.m in Sources */,
+				83692B051C00159400F509D5 /* NSUserDefaults+EJESuite.m in Sources */,
 				8312CD791B79462B008F78BC /* EJELoginItemEnabler.m in Sources */,
 				8312CD7E1B794E03008F78BC /* NSObject+CDLKVO.m in Sources */,
+				83692B001C000AB000F509D5 /* NSUserDefaultsController+EJESuite.m in Sources */,
 				837E0FB81B76797700A18CD7 /* EJEMain.m in Sources */,
 				837E0FB61B76797700A18CD7 /* EJEAppDelegate.m in Sources */,
 			);
@@ -445,7 +459,9 @@
 			files = (
 				83DBDB1F1B7799D000419543 /* ELIMain.m in Sources */,
 				83DBDB1D1B7799D000419543 /* ELIAppDelegate.m in Sources */,
+				83692B021C000FC300F509D5 /* NSObject+CDLKVO.m in Sources */,
 				8379B8CD1BFD761600977293 /* ELIEjectorWorker.m in Sources */,
+				83692B061C00159400F509D5 /* NSUserDefaults+EJESuite.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

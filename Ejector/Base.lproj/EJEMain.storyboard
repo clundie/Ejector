@@ -682,7 +682,22 @@
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="tTB-Yo-toE" name="value" keyPath="values.LoginItemEnabled" id="f74-mb-BVW">
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.LoginItemEnabled" id="ZFv-Ke-qc6">
+                                        <dictionary key="options">
+                                            <integer key="NSNullPlaceholder" value="0"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Gv-sk-DHh">
+                                <rect key="frame" x="205" y="214" width="45" height="18"/>
+                                <animations/>
+                                <buttonCell key="cell" type="check" title="Foo" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="eo4-6T-eJQ">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.Foo" id="ZNe-9o-Oe2">
                                         <dictionary key="options">
                                             <integer key="NSNullPlaceholder" value="0"/>
                                         </dictionary>
