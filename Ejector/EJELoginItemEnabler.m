@@ -26,7 +26,6 @@
   self.observer = [[NSUserDefaultsController sharedUserDefaultsController] cdl_observeKeyPaths:@[keyPath] options:0 block:^(NSString *_, NSDictionary *change) {
     id value = [[NSUserDefaultsController sharedUserDefaultsController] valueForKeyPath:keyPath];
     BOOL loginItemEnabled = [value isKindOfClass:[NSNumber class]] ? [value boolValue] : NO;
-    NSLog(@"%s loginItemEnabled=%@", __PRETTY_FUNCTION__, @(loginItemEnabled));
     SMLoginItemSetEnabled(CFSTR("ca.lundie.EjectorLoginItem"), loginItemEnabled ? true : false);
   }];
   return self;

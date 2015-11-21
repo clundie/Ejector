@@ -7,15 +7,11 @@
 //
 
 #import "ELIAppDelegate.h"
-#import "ELIStatusItem.h"
-#import "ELIParentApp.h"
-#import "../Shared/CDLSchedule+Reader.h"
+#import "ELIEjectorWorker.h"
 
 @interface ELIAppDelegate ()
 
-- (IBAction)openParentApp:(id)sender;
-
-@property (nonatomic) ELIStatusItem *statusItem;
+@property ELIEjectorWorker *worker;
 
 @end
 
@@ -23,18 +19,13 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-  self.statusItem = [[[ELIStatusItem alloc] init] show];
-  CDLSchedule *schedule = [CDLSchedule scheduleWithSharedStorage];
-  NSLog(@"%s schedule.date=%@", __PRETTY_FUNCTION__, schedule.date);
+  self.worker = [[[ELIEjectorWorker alloc] init] start];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)aNotification
 {
-}
-
-- (IBAction)openParentApp:(id)sender
-{
-  [ELIParentApp open];
+  [self.worker stop];
+  self.worker = nil;
 }
 
 @end
