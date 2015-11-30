@@ -20,6 +20,7 @@
 		837E0FBD1B76797700A18CD7 /* EJEImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 837E0FBC1B76797700A18CD7 /* EJEImages.xcassets */; };
 		837E0FC01B76797700A18CD7 /* EJEMain.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837E0FBE1B76797700A18CD7 /* EJEMain.storyboard */; };
 		837E0FCC1B76797700A18CD7 /* EJETests.m in Sources */ = {isa = PBXBuildFile; fileRef = 837E0FCB1B76797700A18CD7 /* EJETests.m */; };
+		83C4E21F1C0BC61D00E92E7D /* ELIParentApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C4E21E1C0BC61D00E92E7D /* ELIParentApp.m */; };
 		83DBDB1D1B7799D000419543 /* ELIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBDB1C1B7799D000419543 /* ELIAppDelegate.m */; };
 		83DBDB1F1B7799D000419543 /* ELIMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBDB1E1B7799D000419543 /* ELIMain.m */; };
 		83DBDB211B7799D000419543 /* ELIImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83DBDB201B7799D000419543 /* ELIImages.xcassets */; };
@@ -89,6 +90,8 @@
 		837E0FCA1B76797700A18CD7 /* EJETestsInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EJETestsInfo.plist; sourceTree = "<group>"; };
 		837E0FCB1B76797700A18CD7 /* EJETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EJETests.m; sourceTree = "<group>"; };
 		837E0FD51B767A8600A18CD7 /* Ejector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Ejector.entitlements; sourceTree = "<group>"; };
+		83C4E21D1C0BC61D00E92E7D /* ELIParentApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIParentApp.h; sourceTree = "<group>"; };
+		83C4E21E1C0BC61D00E92E7D /* ELIParentApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIParentApp.m; sourceTree = "<group>"; };
 		83DBDB171B7799D000419543 /* EjectorLoginItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EjectorLoginItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DBDB1A1B7799D000419543 /* ELIInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ELIInfo.plist; sourceTree = "<group>"; };
 		83DBDB1B1B7799D000419543 /* ELIAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ELIAppDelegate.h; sourceTree = "<group>"; };
@@ -225,6 +228,8 @@
 				83DBDB201B7799D000419543 /* ELIImages.xcassets */,
 				83DBDB221B7799D000419543 /* ELIMainMenu.xib */,
 				83DBDB191B7799D000419543 /* Supporting Files */,
+				83C4E21D1C0BC61D00E92E7D /* ELIParentApp.h */,
+				83C4E21E1C0BC61D00E92E7D /* ELIParentApp.m */,
 			);
 			path = EjectorLoginItem;
 			sourceTree = "<group>";
@@ -457,6 +462,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83C4E21F1C0BC61D00E92E7D /* ELIParentApp.m in Sources */,
 				83DBDB1F1B7799D000419543 /* ELIMain.m in Sources */,
 				83DBDB1D1B7799D000419543 /* ELIAppDelegate.m in Sources */,
 				83692B021C000FC300F509D5 /* NSObject+CDLKVO.m in Sources */,
