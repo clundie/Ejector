@@ -690,14 +690,29 @@
                                 </connections>
                             </button>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Gv-sk-DHh">
-                                <rect key="frame" x="205" y="214" width="45" height="18"/>
+                                <rect key="frame" x="205" y="214" width="59" height="18"/>
                                 <animations/>
-                                <buttonCell key="cell" type="check" title="Foo" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="eo4-6T-eJQ">
+                                <buttonCell key="cell" type="check" title="Notify" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="eo4-6T-eJQ">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                                 <connections>
-                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.Foo" id="ZNe-9o-Oe2">
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.NotificationsEnabled" id="aLd-nj-KB8">
+                                        <dictionary key="options">
+                                            <integer key="NSNullPlaceholder" value="0"/>
+                                        </dictionary>
+                                    </binding>
+                                </connections>
+                            </button>
+                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OLU-Jf-mSP">
+                                <rect key="frame" x="205" y="194" width="90" height="18"/>
+                                <animations/>
+                                <buttonCell key="cell" type="check" title="Force Eject" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Rvr-BD-7d1">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.ForceEject" id="8Nz-iF-50l">
                                         <dictionary key="options">
                                             <integer key="NSNullPlaceholder" value="0"/>
                                         </dictionary>

@@ -7,6 +7,7 @@
 //
 
 #import "ELIEjectorWorker.h"
+#import "../Shared/NSUserDefaults+EJESuite.h"
 
 @import DiskArbitration;
 
@@ -16,16 +17,39 @@ static const NSTimeInterval ejectTimerInterval = 10.0;
 
 static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void *context);
 static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *context);
+static BOOL shouldNotify();
+static void notify(BOOL didSucceed, DADiskRef disk, NSString *informativeText);
+
+static BOOL shouldNotify() {
+  return [[NSUserDefaults eje_sharedSuite] boolForKey:@"NotificationsEnabled"];
+}
+
+static void notify(BOOL didSucceed, DADiskRef disk, NSString *informativeText) {
+  NSUserNotification *notification = [[NSUserNotification alloc] init];
+  notification.title = didSucceed ? @"Ejected Time Machine disk" : @"Failed to eject Time Machine disk";
+  if ([informativeText length]) {
+    notification.informativeText = informativeText;
+  }
+  notification.identifier = @"ca.lundie.EjectorLoginItem.DefaultNotification";
+  notification.hasActionButton = NO;
+  [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}
 
 static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void *context)
 {
   const char *diskName = DADiskGetBSDName(disk);
   if (!dissenter || (DADissenterGetStatus(dissenter) == kDAReturnSuccess)) {
     NSLog(@"Ejected disk %s", diskName);
+    if (shouldNotify()) {
+      notify(YES, disk, nil);
+    }
   } else {
     NSString *errorMessage = (__bridge NSString *)DADissenterGetStatusString(dissenter);
     DAReturn status = DADissenterGetStatus(dissenter);
     NSLog(@"Cannot eject disk %s; status=%x; errorMessage=%@", diskName, status, errorMessage);
+    if (shouldNotify()) {
+      notify(NO, disk, errorMessage);
+    }
   }
 }
 
@@ -39,6 +63,9 @@ static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *cont
     NSString *errorMessage = (__bridge NSString *)DADissenterGetStatusString(dissenter);
     DAReturn status = DADissenterGetStatus(dissenter);
     NSLog(@"Cannot unmount disk %s; status=%x; errorMessage=%@", diskName, status, errorMessage);
+    if (shouldNotify()) {
+      notify(NO, disk, errorMessage);
+    }
   }
 }
 
@@ -114,8 +141,9 @@ static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *cont
   }
   willEject = YES;
   if (!test) {
-    NSLog(@"Trying to unmount %@", [volumeURL absoluteString]);
-    DADiskUnmount(disk, unmountOptions, unmountCallback, NULL);
+    BOOL force = [[NSUserDefaults eje_sharedSuite] boolForKey:@"ForceEject"];
+    NSLog(@"Trying to unmount %@ force=%@", [volumeURL absoluteString], @(force));
+    DADiskUnmount(disk, unmountOptions | (force ? kDADiskUnmountOptionForce : 0), unmountCallback, NULL);
   }
   cleanup:
   if (disk) {

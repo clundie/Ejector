@@ -17,6 +17,11 @@ static NSUserDefaults *_sharedInstance;
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
     _sharedInstance = [[NSUserDefaults alloc] initWithSuiteName:@"LFZPMJ2CPK.ca.lundie.Ejector"];
+    [_sharedInstance registerDefaults:@{
+      @"LoginItemEnabled": @(NO),
+      @"NotificationsEnabled": @(YES),
+      @"ForceEject": @(NO),
+    }];
   });
   return _sharedInstance;
 }
