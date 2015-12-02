@@ -10,6 +10,8 @@
 #import "../Shared/NSUserDefaults+EJESuite.h"
 
 @import DiskArbitration;
+@import IOKit;
+@import IOKit.storage;
 
 typedef __attribute__((NSObject)) DASessionRef RetainedDASessionRef;
 
@@ -19,6 +21,9 @@ static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void *contex
 static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *context);
 static BOOL shouldNotify();
 static void notify(BOOL didSucceed, DADiskRef disk, NSString *informativeText);
+static CFArrayRef copyChildWholeDisks(DASessionRef session, DADiskRef parentDisk);
+static DADiskRef copyRootWholeDisk(DASessionRef session, DADiskRef childDisk);
+static CFArrayRef copyWholeDisks(DASessionRef session, DADiskRef disk);
 
 static BOOL shouldNotify() {
   return [[NSUserDefaults eje_sharedSuite] boolForKey:@"NotificationsEnabled"];
@@ -67,6 +72,124 @@ static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *cont
       notify(NO, disk, errorMessage);
     }
   }
+}
+
+static CFArrayRef copyChildWholeDisks(DASessionRef session, DADiskRef parentDisk) {
+  CFMutableArrayRef wholeDisks = CFArrayCreateMutable(NULL, 0, &kCFTypeArrayCallBacks);
+  io_service_t parentMedia = DADiskCopyIOMedia(parentDisk);
+  io_iterator_t iterator = 0;
+  io_object_t nextObject = 0;
+  if (KERN_SUCCESS != IORegistryEntryCreateIterator(parentMedia, kIOServicePlane, kIORegistryIterateRecursively, &iterator)) {
+    goto cleanup;
+  }
+  if (!iterator) {
+    goto cleanup;
+  }
+  while (1) {
+    if (nextObject) {
+      IOObjectRelease(nextObject);
+    }
+    nextObject = IOIteratorNext(iterator);
+    if (nextObject) {
+      if (IOObjectConformsTo(nextObject, kIOMediaClass)) {
+        CFBooleanRef whole = IORegistryEntryCreateCFProperty(nextObject, CFSTR(kIOMediaWholeKey), NULL, 0);
+        if (whole) {
+          if (CFGetTypeID(whole) == CFBooleanGetTypeID() && CFBooleanGetValue(whole)) {
+            NSLog(@"%s found whole disk", __PRETTY_FUNCTION__);
+            DADiskRef wholeDisk = DADiskCreateFromIOMedia(NULL, session, nextObject);
+            if (wholeDisks) {
+              CFArrayAppendValue(wholeDisks, wholeDisk);
+              CFRelease(wholeDisk);
+            }
+            CFMutableDictionaryRef dict = NULL;
+            if (KERN_SUCCESS == IORegistryEntryCreateCFProperties(nextObject, &dict, NULL, 0)) {
+              if (dict) {
+                NSLog(@"%s %@", __PRETTY_FUNCTION__, (__bridge NSDictionary *)dict);
+                CFRelease(dict);
+              }
+            }
+          }
+          CFRelease(whole);
+        }
+      }
+    } else {
+      break;
+    }
+  }
+cleanup:
+  if (nextObject) {
+    IOObjectRelease(nextObject);
+  }
+  if (iterator) {
+    IOObjectRelease(iterator);
+  }
+  if (parentMedia) {
+    IOObjectRelease(parentMedia);
+  }
+  return wholeDisks;
+}
+
+static DADiskRef copyRootWholeDisk(DASessionRef session, DADiskRef childDisk) {
+  DADiskRef parentDisk = NULL;
+  io_registry_entry_t nextEntry = 0;
+  io_service_t topMedia = DADiskCopyIOMedia(childDisk);
+  if (!topMedia) {
+    goto cleanup;
+  }
+  IOObjectRetain(topMedia);
+  nextEntry = topMedia;
+  while (nextEntry) {
+    {
+      io_registry_entry_t newNextEntry;
+      if (KERN_SUCCESS != IORegistryEntryGetParentEntry(nextEntry, kIOServicePlane, &newNextEntry)) {
+        break;
+      }
+      if (!newNextEntry) {
+        break;
+      }
+      IOObjectRelease(nextEntry);
+      nextEntry = newNextEntry;
+    }
+    if (IOObjectConformsTo(nextEntry, kIOMediaClass)) {
+      CFBooleanRef whole = IORegistryEntryCreateCFProperty(nextEntry, CFSTR(kIOMediaWholeKey), NULL, 0);
+      if (whole) {
+        if (CFGetTypeID(whole) == CFBooleanGetTypeID() && CFBooleanGetValue(whole)) {
+          if (topMedia) {
+            IOObjectRelease(topMedia);
+          }
+          IOObjectRetain(nextEntry);
+          topMedia = nextEntry;
+        }
+        CFRelease(whole);
+      }
+    }
+  }
+  if (!topMedia) {
+    goto cleanup;
+  }
+  parentDisk = DADiskCreateFromIOMedia(NULL, session, topMedia);
+cleanup:
+  if (nextEntry) {
+    IOObjectRelease(nextEntry);
+  }
+  if (topMedia) {
+    IOObjectRelease(topMedia);
+  }
+  return parentDisk;
+}
+
+static CFArrayRef copyWholeDisks(DASessionRef session, DADiskRef disk) {
+  CFMutableArrayRef wholeDisks = CFArrayCreateMutable(NULL, 0, &kCFTypeArrayCallBacks);
+  DADiskRef root = copyRootWholeDisk(session, disk);
+  if (root) {
+    CFArrayAppendValue(wholeDisks, root);
+    CFArrayRef children = copyChildWholeDisks(session, root);
+    if (children) {
+      CFArrayAppendArray(wholeDisks, children, CFRangeMake(0, CFArrayGetCount(children)));
+      CFRelease(children);
+    }
+  }
+  return wholeDisks;
 }
 
 @interface ELIEjectorWorker ()
@@ -127,6 +250,15 @@ static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *cont
   } else {
     disk = DADiskCopyWholeDisk(partition);
     unmountOptions = kDADiskUnmountOptionWhole;
+    CFArrayRef wholeDisks = copyWholeDisks(diskSession, partition);
+    if (wholeDisks) {
+      for (CFIndex i = 0; i < CFArrayGetCount(wholeDisks); i++) {
+        DADiskRef nextWholeDisk = (DADiskRef)CFArrayGetValueAtIndex(wholeDisks, i);
+        NSDictionary *nextWholeDiskDict = CFBridgingRelease(DADiskCopyDescription(nextWholeDisk));
+        NSLog(@"%s nextWholeDiskDict=%@", __PRETTY_FUNCTION__, nextWholeDiskDict);
+      }
+      CFRelease(wholeDisks);
+    }
   }
   if (!disk) {
     NSLog(@"Cannot get disk from volume=%@", [volumeURL absoluteString]);
@@ -142,7 +274,7 @@ static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *cont
   willEject = YES;
   if (!test) {
     BOOL force = [[NSUserDefaults eje_sharedSuite] boolForKey:@"ForceEject"];
-    NSLog(@"Trying to unmount %@ force=%@", [volumeURL absoluteString], @(force));
+    NSLog(@"Trying to unmount %@ force=%@ disk=%@", [volumeURL absoluteString], @(force), diskDescription);
     DADiskUnmount(disk, unmountOptions | (force ? kDADiskUnmountOptionForce : 0), unmountCallback, NULL);
   }
   cleanup:
