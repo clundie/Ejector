@@ -13,7 +13,7 @@
 
 @interface ELIAppDelegate () <NSUserNotificationCenterDelegate>
 
-@property ELIEjectorWorker *worker;
+@property (strong) ELIEjectorWorker *worker;
 
 @end
 

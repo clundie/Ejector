@@ -7,72 +7,20 @@
 //
 
 #import "ELIEjectorWorker.h"
+#import "ELIEjectorGroup.h"
 #import "../Shared/NSUserDefaults+EJESuite.h"
 
 @import DiskArbitration;
 @import IOKit;
 @import IOKit.storage;
 
-typedef __attribute__((NSObject)) DASessionRef RetainedDASessionRef;
-
 static const NSTimeInterval ejectTimerInterval = 10.0;
 
-static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void *context);
-static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *context);
-static BOOL shouldNotify();
-static void notify(BOOL didSucceed, DADiskRef disk, NSString *informativeText);
 static CFArrayRef copyChildWholeDisks(DASessionRef session, DADiskRef parentDisk);
 static DADiskRef copyRootWholeDisk(DASessionRef session, DADiskRef childDisk);
 static CFArrayRef copyWholeDisks(DASessionRef session, DADiskRef disk);
-
-static BOOL shouldNotify() {
-  return [[NSUserDefaults eje_sharedSuite] boolForKey:@"NotificationsEnabled"];
-}
-
-static void notify(BOOL didSucceed, DADiskRef disk, NSString *informativeText) {
-  NSUserNotification *notification = [[NSUserNotification alloc] init];
-  notification.title = didSucceed ? @"Ejected Time Machine disk" : @"Failed to eject Time Machine disk";
-  if ([informativeText length]) {
-    notification.informativeText = informativeText;
-  }
-  notification.identifier = @"ca.lundie.EjectorLoginItem.DefaultNotification";
-  notification.hasActionButton = NO;
-  [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
-}
-
-static void ejectCallback(DADiskRef disk, DADissenterRef dissenter, void *context)
-{
-  const char *diskName = DADiskGetBSDName(disk);
-  if (!dissenter || (DADissenterGetStatus(dissenter) == kDAReturnSuccess)) {
-    NSLog(@"Ejected disk %s", diskName);
-    if (shouldNotify()) {
-      notify(YES, disk, nil);
-    }
-  } else {
-    NSString *errorMessage = (__bridge NSString *)DADissenterGetStatusString(dissenter);
-    DAReturn status = DADissenterGetStatus(dissenter);
-    NSLog(@"Cannot eject disk %s; status=%x; errorMessage=%@", diskName, status, errorMessage);
-    if (shouldNotify()) {
-      notify(NO, disk, errorMessage);
-    }
-  }
-}
-
-static void unmountCallback(DADiskRef disk, DADissenterRef dissenter, void *context)
-{
-  const char *diskName = DADiskGetBSDName(disk);
-  if (!dissenter || (DADissenterGetStatus(dissenter) == kDAReturnSuccess)) {
-    NSLog(@"Unmounted disk %s; trying to eject", diskName);
-    DADiskEject(disk, kDADiskEjectOptionDefault, ejectCallback, NULL);
-  } else {
-    NSString *errorMessage = (__bridge NSString *)DADissenterGetStatusString(dissenter);
-    DAReturn status = DADissenterGetStatus(dissenter);
-    NSLog(@"Cannot unmount disk %s; status=%x; errorMessage=%@", diskName, status, errorMessage);
-    if (shouldNotify()) {
-      notify(NO, disk, errorMessage);
-    }
-  }
-}
+static void notify(NSArray<NSError *> *errors);
+static BOOL shouldNotify();
 
 static CFArrayRef copyChildWholeDisks(DASessionRef session, DADiskRef parentDisk) {
   CFMutableArrayRef wholeDisks = CFArrayCreateMutable(NULL, 0, &kCFTypeArrayCallBacks);
@@ -192,16 +140,39 @@ static CFArrayRef copyWholeDisks(DASessionRef session, DADiskRef disk) {
   return wholeDisks;
 }
 
+static void notify(NSArray<NSError *> *errors) {
+  NSLog(@"%s errors=%@", __PRETTY_FUNCTION__, errors);
+  BOOL didSucceed = [errors count] == 0;
+  NSUserNotification *notification = [[NSUserNotification alloc] init];
+  notification.title = didSucceed ? @"Ejected Time Machine disk" : @"Failed to eject Time Machine disk";
+  notification.identifier = @"ca.lundie.EjectorLoginItem.DefaultNotification";
+  notification.hasActionButton = NO;
+  [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+}
+
+static BOOL shouldNotify() {
+  return [[NSUserDefaults eje_sharedSuite] boolForKey:@"NotificationsEnabled"];
+}
+
 @interface ELIEjectorWorker ()
 
 @property (copy) NSArray<id> *backupdObservers;
-@property (strong) RetainedDASessionRef diskSession;
 @property (strong) NSTimer *ejectTimer;
 @property (copy) NSURL *volumeToEject;
+@property (strong) NSMutableArray<ELIEjectorGroup *> *ejectorGroups;
 
 @end
 
 @implementation ELIEjectorWorker
+
+- (instancetype)init
+{
+  self = [super init];
+  if (self) {
+    self.ejectorGroups = [NSMutableArray array];
+  }
+  return self;
+}
 
 - (void)scheduleEject
 {
@@ -227,73 +198,66 @@ static CFArrayRef copyWholeDisks(DASessionRef session, DADiskRef disk) {
 
 - (BOOL)ejectVolume:(NSURL *)volumeURL test:(BOOL)test
 {
-  BOOL willEject = NO;
-  DADiskRef partition = NULL;
-  DADiskRef disk = NULL;
+  id partition = nil;
+  NSArray *disksToEject = nil;
   NSDictionary *partitionDescription;
-  NSDictionary *diskDescription;
   DADiskUnmountOptions unmountOptions;
-  RetainedDASessionRef diskSession = self.diskSession;
+  id diskSession = CFBridgingRelease(DASessionCreate(NULL));
   if (!diskSession) {
-    goto cleanup;
+    return NO;
   }
-  partition = DADiskCreateFromVolumePath(NULL, diskSession, (__bridge CFURLRef)volumeURL);
+  partition = CFBridgingRelease(DADiskCreateFromVolumePath(NULL, (__bridge DASessionRef)diskSession, (CFURLRef)volumeURL));
   if (!partition) {
     NSLog(@"Cannot get partition from volume=%@", [volumeURL absoluteString]);
-    goto cleanup;
+    return NO;
   }
-  partitionDescription = CFBridgingRelease(DADiskCopyDescription(partition));
+  partitionDescription = CFBridgingRelease(DADiskCopyDescription((DADiskRef)partition));
   if ([partitionDescription[(NSString *)kDADiskDescriptionVolumeNetworkKey] boolValue]) {
     NSLog(@"Volume %@ is network", [volumeURL absoluteString]);
-    disk = (DADiskRef)CFRetain(partition);
+    disksToEject = @[partition];
     unmountOptions = kDADiskUnmountOptionDefault;
   } else {
-    disk = DADiskCopyWholeDisk(partition);
     unmountOptions = kDADiskUnmountOptionWhole;
-    CFArrayRef wholeDisks = copyWholeDisks(diskSession, partition);
-    if (wholeDisks) {
-      for (CFIndex i = 0; i < CFArrayGetCount(wholeDisks); i++) {
-        DADiskRef nextWholeDisk = (DADiskRef)CFArrayGetValueAtIndex(wholeDisks, i);
-        NSDictionary *nextWholeDiskDict = CFBridgingRelease(DADiskCopyDescription(nextWholeDisk));
-        NSLog(@"%s nextWholeDiskDict=%@", __PRETTY_FUNCTION__, nextWholeDiskDict);
-      }
-      CFRelease(wholeDisks);
+    NSArray *wholeDisks = CFBridgingRelease(copyWholeDisks((__bridge DASessionRef)diskSession, (__bridge DADiskRef)partition));
+    if (NSNotFound == [wholeDisks indexOfObjectPassingTest:^BOOL(id  _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+      return [((NSDictionary *)CFBridgingRelease(DADiskCopyDescription((DADiskRef)obj)))[(NSString *)kDADiskDescriptionDeviceInternalKey] boolValue];
+    }]) {
+      disksToEject = [wholeDisks copy];
+    } else {
+      NSLog(@"Volume is on an internal disk %@", [volumeURL absoluteString]);
     }
   }
-  if (!disk) {
-    NSLog(@"Cannot get disk from volume=%@", [volumeURL absoluteString]);
-    goto cleanup;
+  NSLog(@"%s disksToEject:", __PRETTY_FUNCTION__);
+  for (id diskToEject in disksToEject) {
+    NSDictionary *description = CFBridgingRelease(DADiskCopyDescription((DADiskRef)diskToEject));
+    NSLog(@"%@", description);
   }
-  diskDescription = CFBridgingRelease(DADiskCopyDescription(disk));
-  if (
-      [diskDescription[(NSString *)kDADiskDescriptionDeviceInternalKey] boolValue]
-      ) {
-    NSLog(@"Disk %@ is internal; will not eject", [volumeURL absoluteString]);
-    goto cleanup;
+  if (![disksToEject count]) {
+    NSLog(@"No disks to eject from volume=%@", [volumeURL absoluteString]);
+    return NO;
   }
-  willEject = YES;
   if (!test) {
+    __weak typeof(self) weakSelf = self;
     BOOL force = [[NSUserDefaults eje_sharedSuite] boolForKey:@"ForceEject"];
-    NSLog(@"Trying to unmount %@ force=%@ disk=%@", [volumeURL absoluteString], @(force), diskDescription);
-    DADiskUnmount(disk, unmountOptions | (force ? kDADiskUnmountOptionForce : 0), unmountCallback, NULL);
+    ELIEjectorGroup *group = [[ELIEjectorGroup alloc] initWithDisks:disksToEject unmountOptions:unmountOptions force:force completion:^(NSArray<NSError *> *errors, ELIEjectorGroup *ejectorGroup) {
+      __strong typeof(weakSelf) strongSelf = weakSelf;
+      if (!strongSelf) {
+        return;
+      }
+      [strongSelf.ejectorGroups removeObject:ejectorGroup];
+      if (shouldNotify()) {
+        notify(errors);
+      }
+    }];
+    [self.ejectorGroups addObject:group];
+    [group start];
   }
-  cleanup:
-  if (disk) {
-    CFRelease(disk);
-  }
-  if (partition) {
-    CFRelease(partition);
-  }
-  return willEject;
+  return YES;
 }
 
 - (instancetype)start
 {
   NSLog(@"Starting");
-  DASessionRef diskSession = DASessionCreate(NULL);
-  self.diskSession = diskSession;
-  DASessionSetDispatchQueue(diskSession, dispatch_get_main_queue());
-  CFRelease(diskSession);
   // com.apple.backupd.DestinationMountNotification
   // DestinationMountPoint = "/Volumes/{XXX}"
   // When: backup starts.
@@ -355,16 +319,16 @@ static CFArrayRef copyWholeDisks(DASessionRef session, DADiskRef disk) {
 - (void)stop
 {
   NSLog(@"Stopping");
+  for (ELIEjectorGroup *group in self.ejectorGroups) {
+    [group stop];
+  }
+  [self.ejectorGroups removeAllObjects];
+  self.ejectorGroups = nil;
   for (id backupdObserver in self.backupdObservers) {
     [[NSDistributedNotificationCenter defaultCenter] removeObserver:backupdObserver];
   }
   self.backupdObservers = nil;
   [self descheduleEject];
-  RetainedDASessionRef diskSession = self.diskSession;
-  if (diskSession) {
-    DASessionSetDispatchQueue(diskSession, NULL);
-  }
-  self.diskSession = nil;
 }
 
 @end
