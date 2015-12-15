@@ -23,6 +23,10 @@
 		839B383B1C0FB5B7002E6640 /* ELIEjectorGroup.m in Sources */ = {isa = PBXBuildFile; fileRef = 839B383A1C0FB5B7002E6640 /* ELIEjectorGroup.m */; };
 		839B383E1C1270A6002E6640 /* ELIEjectorSingleUnmounter.m in Sources */ = {isa = PBXBuildFile; fileRef = 839B383D1C1270A6002E6640 /* ELIEjectorSingleUnmounter.m */; };
 		839B38411C134598002E6640 /* ELIEjectorSingleEjector.m in Sources */ = {isa = PBXBuildFile; fileRef = 839B38401C134598002E6640 /* ELIEjectorSingleEjector.m */; };
+		83AB8D111C1FB407000F54CB /* ELIStatusItem.m in Sources */ = {isa = PBXBuildFile; fileRef = 83AB8D101C1FB407000F54CB /* ELIStatusItem.m */; };
+		83AB8D131C1FB4A5000F54CB /* ELIStatusItem.xib in Resources */ = {isa = PBXBuildFile; fileRef = 83AB8D121C1FB4A5000F54CB /* ELIStatusItem.xib */; };
+		83AB8D1A1C1FBB16000F54CB /* EjectorStatusItemTemplate.png in Resources */ = {isa = PBXBuildFile; fileRef = 83AB8D181C1FBB16000F54CB /* EjectorStatusItemTemplate.png */; };
+		83AB8D1B1C1FBB16000F54CB /* EjectorStatusItemTemplate@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 83AB8D191C1FBB16000F54CB /* EjectorStatusItemTemplate@2x.png */; };
 		83C4E21F1C0BC61D00E92E7D /* ELIParentApp.m in Sources */ = {isa = PBXBuildFile; fileRef = 83C4E21E1C0BC61D00E92E7D /* ELIParentApp.m */; };
 		83DBDB1D1B7799D000419543 /* ELIAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBDB1C1B7799D000419543 /* ELIAppDelegate.m */; };
 		83DBDB1F1B7799D000419543 /* ELIMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 83DBDB1E1B7799D000419543 /* ELIMain.m */; };
@@ -99,6 +103,11 @@
 		839B383D1C1270A6002E6640 /* ELIEjectorSingleUnmounter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIEjectorSingleUnmounter.m; sourceTree = "<group>"; };
 		839B383F1C134598002E6640 /* ELIEjectorSingleEjector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIEjectorSingleEjector.h; sourceTree = "<group>"; };
 		839B38401C134598002E6640 /* ELIEjectorSingleEjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIEjectorSingleEjector.m; sourceTree = "<group>"; };
+		83AB8D0F1C1FB407000F54CB /* ELIStatusItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIStatusItem.h; sourceTree = "<group>"; };
+		83AB8D101C1FB407000F54CB /* ELIStatusItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIStatusItem.m; sourceTree = "<group>"; };
+		83AB8D121C1FB4A5000F54CB /* ELIStatusItem.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ELIStatusItem.xib; sourceTree = "<group>"; };
+		83AB8D181C1FBB16000F54CB /* EjectorStatusItemTemplate.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = EjectorStatusItemTemplate.png; sourceTree = "<group>"; };
+		83AB8D191C1FBB16000F54CB /* EjectorStatusItemTemplate@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "EjectorStatusItemTemplate@2x.png"; sourceTree = "<group>"; };
 		83C4E21D1C0BC61D00E92E7D /* ELIParentApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIParentApp.h; sourceTree = "<group>"; };
 		83C4E21E1C0BC61D00E92E7D /* ELIParentApp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIParentApp.m; sourceTree = "<group>"; };
 		83DBDB171B7799D000419543 /* EjectorLoginItem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EjectorLoginItem.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -230,6 +239,8 @@
 			isa = PBXGroup;
 			children = (
 				83DBDB371B7799E700419543 /* EjectorLoginItem.entitlements */,
+				83AB8D181C1FBB16000F54CB /* EjectorStatusItemTemplate.png */,
+				83AB8D191C1FBB16000F54CB /* EjectorStatusItemTemplate@2x.png */,
 				83DBDB1B1B7799D000419543 /* ELIAppDelegate.h */,
 				83DBDB1C1B7799D000419543 /* ELIAppDelegate.m */,
 				839B38391C0FB5B7002E6640 /* ELIEjectorGroup.h */,
@@ -244,6 +255,9 @@
 				83DBDB221B7799D000419543 /* ELIMainMenu.xib */,
 				83C4E21D1C0BC61D00E92E7D /* ELIParentApp.h */,
 				83C4E21E1C0BC61D00E92E7D /* ELIParentApp.m */,
+				83AB8D0F1C1FB407000F54CB /* ELIStatusItem.h */,
+				83AB8D101C1FB407000F54CB /* ELIStatusItem.m */,
+				83AB8D121C1FB4A5000F54CB /* ELIStatusItem.xib */,
 				83DBDB191B7799D000419543 /* Supporting Files */,
 			);
 			path = EjectorLoginItem;
@@ -436,8 +450,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83AB8D131C1FB4A5000F54CB /* ELIStatusItem.xib in Resources */,
 				83DBDB211B7799D000419543 /* ELIImages.xcassets in Resources */,
+				83AB8D1B1C1FBB16000F54CB /* EjectorStatusItemTemplate@2x.png in Resources */,
 				83DBDB241B7799D000419543 /* ELIMainMenu.xib in Resources */,
+				83AB8D1A1C1FBB16000F54CB /* EjectorStatusItemTemplate.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,6 +501,7 @@
 				8379B8CD1BFD761600977293 /* ELIEjectorWorker.m in Sources */,
 				839B383E1C1270A6002E6640 /* ELIEjectorSingleUnmounter.m in Sources */,
 				839B38411C134598002E6640 /* ELIEjectorSingleEjector.m in Sources */,
+				83AB8D111C1FB407000F54CB /* ELIStatusItem.m in Sources */,
 				839B383B1C0FB5B7002E6640 /* ELIEjectorGroup.m in Sources */,
 				83692B061C00159400F509D5 /* NSUserDefaults+EJESuite.m in Sources */,
 			);

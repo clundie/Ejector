@@ -9,11 +9,13 @@
 #import "ELIAppDelegate.h"
 #import "ELIEjectorWorker.h"
 #import "ELIParentApp.h"
+#import "ELIStatusItem.h"
 #import "../Shared/NSUserDefaults+EJESuite.h"
 
 @interface ELIAppDelegate () <NSUserNotificationCenterDelegate>
 
 @property (strong) ELIEjectorWorker *worker;
+@property (strong) ELIStatusItem *statusItem;
 
 @end
 
@@ -39,6 +41,7 @@ static BOOL shouldActivateParentApp(NSUserNotification *notification)
     [[NSApplication sharedApplication] terminate:self];
     return;
   }
+  self.statusItem = [[[ELIStatusItem alloc] init] show];
   [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
   self.worker = [[[ELIEjectorWorker alloc] init] start];
   [[NSDistributedNotificationCenter defaultCenter] addObserverForName:@"ca.lundie.Ejector.DefaultsChanged" object:@"ca.lundie.Ejector" queue:nil usingBlock:^(NSNotification * _Nonnull note) {
