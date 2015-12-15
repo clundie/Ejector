@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="9531"/>
+        <capability name="box content view" minToolsVersion="7.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -671,62 +672,107 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="EJEViewController" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
+                        <rect key="frame" x="0.0" y="0.0" width="322" height="316"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <button translatesAutoresizingMaskIntoConstraints="NO" id="5Sv-Sq-cb2">
-                                <rect key="frame" x="205" y="234" width="71" height="18"/>
-                                <buttonCell key="cell" type="check" title="Enabled" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="h5I-2e-AiD">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.LoginItemEnabled" id="ZFv-Ke-qc6">
-                                        <dictionary key="options">
-                                            <integer key="NSNullPlaceholder" value="0"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Gv-sk-DHh">
-                                <rect key="frame" x="205" y="214" width="59" height="18"/>
-                                <buttonCell key="cell" type="check" title="Notify" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="eo4-6T-eJQ">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.NotificationsEnabled" id="aLd-nj-KB8">
-                                        <dictionary key="options">
-                                            <integer key="NSNullPlaceholder" value="0"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </button>
-                            <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OLU-Jf-mSP">
-                                <rect key="frame" x="205" y="194" width="90" height="18"/>
-                                <buttonCell key="cell" type="check" title="Force Eject" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Rvr-BD-7d1">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.ForceEject" id="8Nz-iF-50l">
-                                        <dictionary key="options">
-                                            <integer key="NSNullPlaceholder" value="0"/>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </button>
+                            <box fixedFrame="YES" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="CAK-5j-PRj">
+                                <rect key="frame" x="17" y="197" width="288" height="101"/>
+                                <view key="contentView" ambiguous="YES" id="T7v-na-rYZ">
+                                    <rect key="frame" x="1" y="1" width="286" height="99"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5Sv-Sq-cb2">
+                                            <rect key="frame" x="18" y="63" width="71" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Enabled" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="h5I-2e-AiD">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.LoginItemEnabled" id="ZFv-Ke-qc6">
+                                                    <dictionary key="options">
+                                                        <integer key="NSNullPlaceholder" value="0"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </button>
+                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sIp-j1-7lW">
+                                            <rect key="frame" x="18" y="20" width="250" height="36"/>
+                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Your Time Machine disk will be ejected shortly after the next backup." id="vZN-6A-cvs">
+                                                <font key="font" metaFont="system"/>
+                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </box>
+                            <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="Elb-RS-OpK">
+                                <rect key="frame" x="17" y="137" width="288" height="56"/>
+                                <view key="contentView" id="JIF-9Q-hK8">
+                                    <rect key="frame" x="1" y="1" width="286" height="54"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2Gv-sk-DHh">
+                                            <rect key="frame" x="18" y="18" width="143" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Notify after ejecting" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="eo4-6T-eJQ">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.NotificationsEnabled" id="aLd-nj-KB8">
+                                                    <dictionary key="options">
+                                                        <integer key="NSNullPlaceholder" value="0"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                </view>
+                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </box>
+                            <box autoresizesSubviews="NO" fixedFrame="YES" borderType="line" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="9Se-ix-j3g">
+                                <rect key="frame" x="17" y="16" width="288" height="119"/>
+                                <view key="contentView" id="gCZ-4M-jJj">
+                                    <rect key="frame" x="1" y="1" width="286" height="117"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OLU-Jf-mSP">
+                                            <rect key="frame" x="18" y="81" width="90" height="18"/>
+                                            <buttonCell key="cell" type="check" title="Force Eject" bezelStyle="regularSquare" imagePosition="left" alignment="left" inset="2" id="Rvr-BD-7d1">
+                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                <font key="font" metaFont="system"/>
+                                            </buttonCell>
+                                            <connections>
+                                                <binding destination="XfG-lQ-9wD" name="value" keyPath="self.defaultsSuiteController.values.ForceEject" id="8Nz-iF-50l">
+                                                    <dictionary key="options">
+                                                        <integer key="NSNullPlaceholder" value="0"/>
+                                                    </dictionary>
+                                                </binding>
+                                            </connections>
+                                        </button>
+                                        <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6RM-Y3-vFc">
+                                            <rect key="frame" x="18" y="20" width="250" height="55"/>
+                                            <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="May cause data loss. The disk will be ejected even if another application is using it." id="H6z-hE-WI3">
+                                                <font key="font" metaFont="systemMedium" size="13"/>
+                                                <color key="textColor" red="0.58823531870000001" green="0.1647058874" blue="0.17254902420000001" alpha="1" colorSpace="deviceRGB"/>
+                                                <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                            </textFieldCell>
+                                        </textField>
+                                    </subviews>
+                                </view>
+                                <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                                <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </box>
                         </subviews>
-                        <constraints>
-                            <constraint firstAttribute="centerX" secondItem="5Sv-Sq-cb2" secondAttribute="centerX" id="Ttn-40-Gj4"/>
-                            <constraint firstItem="5Sv-Sq-cb2" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" symbolic="YES" id="nel-6W-nlA"/>
-                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="tTB-Yo-toE"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="-4" y="678"/>
         </scene>
     </scenes>
 </document>
