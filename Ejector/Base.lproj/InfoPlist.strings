@@ -1,0 +1,10 @@
+/* 
+  InfoPlist.strings
+  Ejector
+
+  Created by Chris Lundie on 15/Dec/2015.
+  Copyright © 2015 Chris Lundie. All rights reserved.
+*/
+
+"CFBundleDisplayName" = "Ejector";
+"CFBundleName" = "Ejector";

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		8312CD791B79462B008F78BC /* EJELoginItemEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */; };
 		8312CD7E1B794E03008F78BC /* NSObject+CDLKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */; };
+		832DECF61C2052E40005F7AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 832DECF81C2052E40005F7AC /* InfoPlist.strings */; };
+		832DECFC1C2053DF0005F7AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 832DECFE1C2053DF0005F7AC /* InfoPlist.strings */; };
 		83692B001C000AB000F509D5 /* NSUserDefaultsController+EJESuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 83692AFF1C000AB000F509D5 /* NSUserDefaultsController+EJESuite.m */; };
 		83692B021C000FC300F509D5 /* NSObject+CDLKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */; };
 		83692B051C00159400F509D5 /* NSUserDefaults+EJESuite.m in Sources */ = {isa = PBXBuildFile; fileRef = 83692B041C00159400F509D5 /* NSUserDefaults+EJESuite.m */; };
@@ -78,6 +80,8 @@
 		8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJELoginItemEnabler.m; sourceTree = "<group>"; };
 		8312CD7C1B794E03008F78BC /* NSObject+CDLKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CDLKVO.h"; sourceTree = "<group>"; };
 		8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSObject+CDLKVO.m"; sourceTree = "<group>"; };
+		832DECF91C2053110005F7AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		832DECFD1C2053DF0005F7AC /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		83692AFE1C000AB000F509D5 /* NSUserDefaultsController+EJESuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaultsController+EJESuite.h"; sourceTree = "<group>"; };
 		83692AFF1C000AB000F509D5 /* NSUserDefaultsController+EJESuite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaultsController+EJESuite.m"; sourceTree = "<group>"; };
 		83692B031C00159400F509D5 /* NSUserDefaults+EJESuite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+EJESuite.h"; sourceTree = "<group>"; };
@@ -205,6 +209,7 @@
 				837E0FB21B76797700A18CD7 /* Supporting Files */,
 				8312CD771B79462B008F78BC /* EJELoginItemEnabler.h */,
 				8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */,
+				832DECFE1C2053DF0005F7AC /* InfoPlist.strings */,
 			);
 			path = Ejector;
 			sourceTree = "<group>";
@@ -259,6 +264,7 @@
 				83AB8D101C1FB407000F54CB /* ELIStatusItem.m */,
 				83AB8D121C1FB4A5000F54CB /* ELIStatusItem.xib */,
 				83DBDB191B7799D000419543 /* Supporting Files */,
+				832DECF81C2052E40005F7AC /* InfoPlist.strings */,
 			);
 			path = EjectorLoginItem;
 			sourceTree = "<group>";
@@ -435,6 +441,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837E0FBD1B76797700A18CD7 /* EJEImages.xcassets in Resources */,
+				832DECFC1C2053DF0005F7AC /* InfoPlist.strings in Resources */,
 				837E0FC01B76797700A18CD7 /* EJEMain.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -451,6 +458,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				83AB8D131C1FB4A5000F54CB /* ELIStatusItem.xib in Resources */,
+				832DECF61C2052E40005F7AC /* InfoPlist.strings in Resources */,
 				83DBDB211B7799D000419543 /* ELIImages.xcassets in Resources */,
 				83AB8D1B1C1FBB16000F54CB /* EjectorStatusItemTemplate@2x.png in Resources */,
 				83DBDB241B7799D000419543 /* ELIMainMenu.xib in Resources */,
@@ -536,6 +544,22 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
+		832DECF81C2052E40005F7AC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				832DECF91C2053110005F7AC /* Base */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		832DECFE1C2053DF0005F7AC /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				832DECFD1C2053DF0005F7AC /* Base */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		837E0FBE1B76797700A18CD7 /* EJEMain.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

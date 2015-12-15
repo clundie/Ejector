@@ -144,10 +144,13 @@ static void notify(NSArray<NSError *> *errors) {
   NSLog(@"%s errors=%@", __PRETTY_FUNCTION__, errors);
   BOOL didSucceed = [errors count] == 0;
   NSUserNotification *notification = [[NSUserNotification alloc] init];
-  notification.title = didSucceed ? @"Ejected Time Machine disk" : @"Failed to eject Time Machine disk";
+  notification.title = @"Ejector";
+  notification.informativeText = didSucceed ? @"Ejected Time Machine disk" : @"Failed to eject Time Machine disk";
   notification.identifier = @"ca.lundie.EjectorLoginItem.DefaultNotification";
   notification.hasActionButton = NO;
-  [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+  NSUserNotificationCenter *nc = [NSUserNotificationCenter defaultUserNotificationCenter];
+  [nc removeAllDeliveredNotifications];
+  [nc deliverNotification:notification];
 }
 
 static BOOL shouldNotify() {
