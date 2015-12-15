@@ -208,12 +208,12 @@ static BOOL shouldNotify() {
   }
   partition = CFBridgingRelease(DADiskCreateFromVolumePath(NULL, (__bridge DASessionRef)diskSession, (CFURLRef)volumeURL));
   if (!partition) {
-    NSLog(@"Cannot get partition from volume=%@", [volumeURL absoluteString]);
+    NSLog(@"%s Cannot get partition from volume=%@", __PRETTY_FUNCTION__, [volumeURL absoluteString]);
     return NO;
   }
   partitionDescription = CFBridgingRelease(DADiskCopyDescription((DADiskRef)partition));
   if ([partitionDescription[(NSString *)kDADiskDescriptionVolumeNetworkKey] boolValue]) {
-    NSLog(@"Volume %@ is network", [volumeURL absoluteString]);
+    NSLog(@"%s Volume %@ is network", __PRETTY_FUNCTION__, [volumeURL absoluteString]);
     disksToEject = @[partition];
     unmountOptions = kDADiskUnmountOptionDefault;
   } else {
@@ -224,7 +224,7 @@ static BOOL shouldNotify() {
     }]) {
       disksToEject = [wholeDisks copy];
     } else {
-      NSLog(@"Volume is on an internal disk %@", [volumeURL absoluteString]);
+      NSLog(@"%s Volume is on an internal disk %@", __PRETTY_FUNCTION__, [volumeURL absoluteString]);
     }
   }
   NSLog(@"%s disksToEject:", __PRETTY_FUNCTION__);
