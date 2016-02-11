@@ -12,6 +12,11 @@
 @import IOKit;
 @import IOKit.storage;
 
+static const NSTimeInterval TIMEOUT_INTERVAL = 60.0;
+
+NSString * const ELIEjectorGroupErrorDomain = @"ELIEjectorGroupErrorDomain";
+const NSInteger ELIEjectorGroupErrorTimeout = 1;
+
 @interface ELIEjectorGroup ()
 
 @property (copy) ELIEjectorGroupCompletion completion;
@@ -20,6 +25,7 @@
 @property (assign) DADiskUnmountOptions unmountOptions;
 @property (strong) NSMutableArray<ELIEjectorSingleUnmounter *> *singleUnmounters;
 @property (strong) NSMutableArray<ELIEjectorSingleEjector *> *singleEjectors;
+@property (strong) NSTimer *timeoutTimer;
 @property (strong) NSMutableArray<NSError *> *errors;
 
 @end
@@ -43,6 +49,8 @@
 
 - (instancetype)stop
 {
+  [self.timeoutTimer invalidate];
+  self.timeoutTimer = nil;
   self.completion = nil;
   for (ELIEjectorSingleUnmounter *singleUnmounter in [self.singleUnmounters copy]) {
     [singleUnmounter stop];
@@ -107,10 +115,21 @@
     }];
     [self.singleUnmounters addObject:singleUnmounter];
   }
+  self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:TIMEOUT_INTERVAL target:self selector:@selector(timeoutTimerDidFire:) userInfo:nil repeats:NO];
   for (ELIEjectorSingleUnmounter *singleUnmounter in [self.singleUnmounters copy]) {
     [singleUnmounter start];
   }
   return self;
+}
+
+- (void)timeoutTimerDidFire:(NSTimer *)timer
+{
+  ELIEjectorGroupCompletion completion = self.completion;
+  [self stop];
+  if (!completion) {
+    return;
+  }
+  completion(@[[NSError errorWithDomain:ELIEjectorGroupErrorDomain code:ELIEjectorGroupErrorTimeout userInfo:@{NSLocalizedDescriptionKey: @"Timed out"}]], self);
 }
 
 @end

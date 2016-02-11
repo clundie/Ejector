@@ -13,6 +13,9 @@
 
 typedef void(^ELIEjectorGroupCompletion)(NSArray<NSError *> *, ELIEjectorGroup *);
 
+extern NSString * const ELIEjectorGroupErrorDomain;
+extern const NSInteger ELIEjectorGroupErrorTimeout;
+
 @interface ELIEjectorGroup : NSObject
 
 - (instancetype)initWithDisks:(NSArray *)disks unmountOptions:(DADiskUnmountOptions)unmountOptions force:(BOOL)force completion:(ELIEjectorGroupCompletion)completion;
