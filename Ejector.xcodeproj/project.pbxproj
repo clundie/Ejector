@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830D24521C6D5A950067665F /* EJEMainWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 830D24511C6D5A950067665F /* EJEMainWindowController.m */; };
 		8312CD791B79462B008F78BC /* EJELoginItemEnabler.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */; };
 		8312CD7E1B794E03008F78BC /* NSObject+CDLKVO.m in Sources */ = {isa = PBXBuildFile; fileRef = 8312CD7D1B794E03008F78BC /* NSObject+CDLKVO.m */; };
 		832DECF61C2052E40005F7AC /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 832DECF81C2052E40005F7AC /* InfoPlist.strings */; };
@@ -76,6 +77,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		830D24501C6D5A950067665F /* EJEMainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJEMainWindowController.h; sourceTree = "<group>"; };
+		830D24511C6D5A950067665F /* EJEMainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJEMainWindowController.m; sourceTree = "<group>"; };
 		8312CD771B79462B008F78BC /* EJELoginItemEnabler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EJELoginItemEnabler.h; sourceTree = "<group>"; };
 		8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EJELoginItemEnabler.m; sourceTree = "<group>"; };
 		8312CD7C1B794E03008F78BC /* NSObject+CDLKVO.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+CDLKVO.h"; sourceTree = "<group>"; };
@@ -199,17 +202,19 @@
 		837E0FB11B76797700A18CD7 /* Ejector */ = {
 			isa = PBXGroup;
 			children = (
-				837E0FD51B767A8600A18CD7 /* Ejector.entitlements */,
 				837E0FB41B76797700A18CD7 /* EJEAppDelegate.h */,
 				837E0FB51B76797700A18CD7 /* EJEAppDelegate.m */,
-				837E0FB91B76797700A18CD7 /* EJEViewController.h */,
-				837E0FBA1B76797700A18CD7 /* EJEViewController.m */,
+				837E0FD51B767A8600A18CD7 /* Ejector.entitlements */,
 				837E0FBC1B76797700A18CD7 /* EJEImages.xcassets */,
-				837E0FBE1B76797700A18CD7 /* EJEMain.storyboard */,
-				837E0FB21B76797700A18CD7 /* Supporting Files */,
 				8312CD771B79462B008F78BC /* EJELoginItemEnabler.h */,
 				8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */,
+				837E0FBE1B76797700A18CD7 /* EJEMain.storyboard */,
+				830D24501C6D5A950067665F /* EJEMainWindowController.h */,
+				830D24511C6D5A950067665F /* EJEMainWindowController.m */,
+				837E0FB91B76797700A18CD7 /* EJEViewController.h */,
+				837E0FBA1B76797700A18CD7 /* EJEViewController.m */,
 				832DECFE1C2053DF0005F7AC /* InfoPlist.strings */,
+				837E0FB21B76797700A18CD7 /* Supporting Files */,
 			);
 			path = Ejector;
 			sourceTree = "<group>";
@@ -481,6 +486,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				837E0FBB1B76797700A18CD7 /* EJEViewController.m in Sources */,
+				830D24521C6D5A950067665F /* EJEMainWindowController.m in Sources */,
 				83692B051C00159400F509D5 /* NSUserDefaults+EJESuite.m in Sources */,
 				8312CD791B79462B008F78BC /* EJELoginItemEnabler.m in Sources */,
 				8312CD7E1B794E03008F78BC /* NSObject+CDLKVO.m in Sources */,
