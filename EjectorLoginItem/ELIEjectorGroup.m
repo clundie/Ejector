@@ -65,55 +65,66 @@ const NSInteger ELIEjectorGroupErrorTimeout = 1;
 
 - (instancetype)start
 {
+  __weak typeof(self) weakSelf = self;
   for (id disk in self.disks) {
-    NSDictionary *diskDescription = CFBridgingRelease(DADiskCopyDescription((DADiskRef)disk));
-    BOOL isLeaf = [((NSNumber *)(diskDescription[(NSString *)kDADiskDescriptionMediaLeafKey])) boolValue];
-    if (!isLeaf) {
-      __weak typeof(self) weakSelf = self;
-      ELIEjectorSingleEjector *ejector = [[ELIEjectorSingleEjector alloc] initWithDisk:(DADiskRef)disk completion:^(NSError *error, ELIEjectorSingleEjector *_ejector) {
-        __strong typeof(weakSelf) strongSelf = weakSelf;
-        ELIEjectorGroupCompletion completion = strongSelf.completion;
-        if (!strongSelf || !completion) {
-          return;
-        }
-        if (error) {
-          [strongSelf.errors addObject:[error copy]];
-        }
-        NSMutableArray *singleEjectors = strongSelf.singleEjectors;
-        NSArray<NSError *> *errors = [strongSelf.errors copy];
-        [singleEjectors removeObject:_ejector];
-        if (![singleEjectors count]) {
-          [strongSelf stop];
-          completion(errors, strongSelf);
-        }
-      }];
-      [self.singleEjectors addObject:ejector];
-    }
-    __weak typeof(self) weakSelf = self;
-    ELIEjectorSingleUnmounter *singleUnmounter = [[ELIEjectorSingleUnmounter alloc] initWithDisk:(DADiskRef)disk unmountOptions:self.unmountOptions force:self.force completion:^(NSError *error, ELIEjectorSingleUnmounter *_singleUnmounter) {
+
+    ELIEjectorSingleUnmounter *singleUnmounter = [[ELIEjectorSingleUnmounter alloc] initWithDisk:(DADiskRef)disk unmountOptions:self.unmountOptions force:self.force completion:^(NSError *unmountError, ELIEjectorSingleUnmounter *_singleUnmounter) {
       __strong typeof(weakSelf) strongSelf = weakSelf;
       ELIEjectorGroupCompletion completion = strongSelf.completion;
       if (!strongSelf || !completion) {
         return;
       }
-      if (error) {
-        [strongSelf.errors addObject:[error copy]];
-      }
-      NSMutableArray *singleUnmounters = strongSelf.singleUnmounters;
-      NSArray<NSError *> *errors = [strongSelf.errors copy];
+      NSMutableArray<ELIEjectorSingleUnmounter *> *singleUnmounters = strongSelf.singleUnmounters;
       [singleUnmounters removeObject:_singleUnmounter];
-      if (![singleUnmounters count]) {
-        if ([self.singleEjectors count]) {
-          for (ELIEjectorSingleEjector *ejector in [self.singleEjectors copy]) {
-            [ejector start];
+      if (unmountError) {
+        [strongSelf.errors addObject:[unmountError copy]];
+        NSArray<NSError *> *errors = [strongSelf.errors copy];
+        [strongSelf stop];
+        completion(errors, strongSelf);
+      } else {
+        if (![singleUnmounters count]) {
+          NSArray<ELIEjectorSingleEjector *> *singleEjectors = [strongSelf.singleEjectors copy];
+          if ([singleEjectors count]) {
+            for (ELIEjectorSingleEjector *ejector in singleEjectors) {
+              [ejector start];
+            }
+          } else {
+            NSArray<NSError *> *errors = [strongSelf.errors copy];
+            [strongSelf stop];
+            completion(errors, strongSelf);
           }
-        } else {
-          [strongSelf stop];
-          completion(errors, strongSelf);
         }
       }
     }];
     [self.singleUnmounters addObject:singleUnmounter];
+
+    NSDictionary<NSString *, id> *diskDescription = CFBridgingRelease(DADiskCopyDescription((DADiskRef)disk));
+    BOOL isLeaf = [((NSNumber *)(diskDescription[(NSString *)kDADiskDescriptionMediaLeafKey])) boolValue];
+    if (!isLeaf) {
+      ELIEjectorSingleEjector *ejector = [[ELIEjectorSingleEjector alloc] initWithDisk:(DADiskRef)disk completion:^(NSError *ejectError, ELIEjectorSingleEjector *_ejector) {
+        __strong typeof(weakSelf) strongSelf = weakSelf;
+        ELIEjectorGroupCompletion completion = strongSelf.completion;
+        if (!strongSelf || !completion) {
+          return;
+        }
+        NSMutableArray<ELIEjectorSingleEjector *> *singleEjectors = strongSelf.singleEjectors;
+        [singleEjectors removeObject:_ejector];
+        if (ejectError) {
+          [strongSelf.errors addObject:[ejectError copy]];
+          NSArray<NSError *> *errors = [strongSelf.errors copy];
+          [strongSelf stop];
+          completion(errors, strongSelf);
+        } else {
+          if (![singleEjectors count]) {
+            NSArray<NSError *> *errors = [strongSelf.errors copy];
+            [strongSelf stop];
+            completion(errors, strongSelf);
+          }
+        }
+      }];
+      [self.singleEjectors addObject:ejector];
+    }
+
   }
   self.timeoutTimer = [NSTimer scheduledTimerWithTimeInterval:TIMEOUT_INTERVAL target:self selector:@selector(timeoutTimerDidFire:) userInfo:nil repeats:NO];
   for (ELIEjectorSingleUnmounter *singleUnmounter in [self.singleUnmounters copy]) {
