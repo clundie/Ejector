@@ -28,4 +28,9 @@
   return YES;
 }
 
+- (IBAction)showHelp:(id)sender
+{
+  [[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:@"https://www.lundie.ca/ejector/"]];
+}
+
 @end
