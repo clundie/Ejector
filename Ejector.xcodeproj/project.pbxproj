@@ -790,6 +790,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.EjectorLoginItem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
+				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -807,6 +808,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.EjectorLoginItem;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
+				SKIP_INSTALL = YES;
 			};
 			name = Release;
 		};
