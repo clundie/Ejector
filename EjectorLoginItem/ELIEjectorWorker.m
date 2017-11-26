@@ -20,7 +20,7 @@ static CFArrayRef copyChildWholeDisks(DASessionRef session, DADiskRef parentDisk
 static DADiskRef copyRootWholeDisk(DASessionRef session, DADiskRef childDisk);
 static CFArrayRef copyWholeDisks(DASessionRef session, DADiskRef disk);
 static void notify(NSArray<NSError *> *errors);
-static BOOL shouldNotify();
+static BOOL shouldNotify(void);
 
 static CFArrayRef copyChildWholeDisks(DASessionRef session, DADiskRef parentDisk) {
   CFMutableArrayRef wholeDisks = CFArrayCreateMutable(NULL, 0, &kCFTypeArrayCallBacks);
