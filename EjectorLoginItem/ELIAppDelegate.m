@@ -46,8 +46,6 @@ static BOOL shouldActivateParentApp(NSUserNotification *notification)
   self.worker = [[[ELIEjectorWorker alloc] init] start];
   [[NSDistributedNotificationCenter defaultCenter] addObserverForName:@"ca.lundie.Ejector2.DefaultsChanged" object:@"ca.lundie.Ejector2" queue:nil usingBlock:^(NSNotification * _Nonnull note) {
     [defaults synchronize];
-    BOOL b = [defaults boolForKey:@"NotificationsEnabled"];
-    NSLog(@"NotificationsEnabled=%@", [NSNumber numberWithBool:b]);
   }];
 }
 
