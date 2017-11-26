@@ -6,9 +6,7 @@ Machine disk automatically after a backup completes.
 
 ## Downloads and documentation
 
-The app is a free download on the Mac App Store.
-
-https://www.lundie.ca/ejector/
+https://github.com/clundie/Ejector/releases
 
 
 ## License
