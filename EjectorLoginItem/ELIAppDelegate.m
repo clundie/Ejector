@@ -23,7 +23,7 @@ static BOOL shouldActivateParentApp(NSUserNotification *notification);
 
 static BOOL shouldActivateParentApp(NSUserNotification *notification)
 {
-  return notification && notification.activationType == NSUserNotificationActivationTypeContentsClicked && [notification.identifier isEqualToString:@"ca.lundie.EjectorLoginItem.DefaultNotification"];
+  return notification && notification.activationType == NSUserNotificationActivationTypeContentsClicked && [notification.identifier isEqualToString:@"ca.lundie.EjectorLoginItem2.DefaultNotification"];
 }
 
 @implementation ELIAppDelegate
@@ -44,8 +44,10 @@ static BOOL shouldActivateParentApp(NSUserNotification *notification)
   self.statusItem = [[[ELIStatusItem alloc] init] show];
   [NSUserNotificationCenter defaultUserNotificationCenter].delegate = self;
   self.worker = [[[ELIEjectorWorker alloc] init] start];
-  [[NSDistributedNotificationCenter defaultCenter] addObserverForName:@"ca.lundie.Ejector.DefaultsChanged" object:@"ca.lundie.Ejector" queue:nil usingBlock:^(NSNotification * _Nonnull note) {
+  [[NSDistributedNotificationCenter defaultCenter] addObserverForName:@"ca.lundie.Ejector2.DefaultsChanged" object:@"ca.lundie.Ejector2" queue:nil usingBlock:^(NSNotification * _Nonnull note) {
     [defaults synchronize];
+    BOOL b = [defaults boolForKey:@"NotificationsEnabled"];
+    NSLog(@"NotificationsEnabled=%@", [NSNumber numberWithBool:b]);
   }];
 }
 

@@ -103,7 +103,6 @@
 		837E0FC51B76797700A18CD7 /* EjectorTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EjectorTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		837E0FCA1B76797700A18CD7 /* EJETestsInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = EJETestsInfo.plist; sourceTree = "<group>"; };
 		837E0FCB1B76797700A18CD7 /* EJETests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EJETests.m; sourceTree = "<group>"; };
-		837E0FD51B767A8600A18CD7 /* Ejector.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Ejector.entitlements; sourceTree = "<group>"; };
 		839B38391C0FB5B7002E6640 /* ELIEjectorGroup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIEjectorGroup.h; sourceTree = "<group>"; };
 		839B383A1C0FB5B7002E6640 /* ELIEjectorGroup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ELIEjectorGroup.m; sourceTree = "<group>"; };
 		839B383C1C1270A6002E6640 /* ELIEjectorSingleUnmounter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ELIEjectorSingleUnmounter.h; sourceTree = "<group>"; };
@@ -127,7 +126,6 @@
 		83DBDB291B7799D000419543 /* EjectorLoginItemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = EjectorLoginItemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83DBDB2E1B7799D000419543 /* ELITestsInfo.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ELITestsInfo.plist; sourceTree = "<group>"; };
 		83DBDB2F1B7799D000419543 /* ELITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ELITests.m; sourceTree = "<group>"; };
-		83DBDB371B7799E700419543 /* EjectorLoginItem.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = EjectorLoginItem.entitlements; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,7 +202,6 @@
 			children = (
 				837E0FB41B76797700A18CD7 /* EJEAppDelegate.h */,
 				837E0FB51B76797700A18CD7 /* EJEAppDelegate.m */,
-				837E0FD51B767A8600A18CD7 /* Ejector.entitlements */,
 				837E0FBC1B76797700A18CD7 /* EJEImages.xcassets */,
 				8312CD771B79462B008F78BC /* EJELoginItemEnabler.h */,
 				8312CD781B79462B008F78BC /* EJELoginItemEnabler.m */,
@@ -248,7 +245,6 @@
 		83DBDB181B7799D000419543 /* EjectorLoginItem */ = {
 			isa = PBXGroup;
 			children = (
-				83DBDB371B7799E700419543 /* EjectorLoginItem.entitlements */,
 				83AB8D181C1FBB16000F54CB /* EjectorStatusItemTemplate.png */,
 				83AB8D191C1FBB16000F54CB /* EjectorStatusItemTemplate@2x.png */,
 				83DBDB1B1B7799D000419543 /* ELIAppDelegate.h */,
@@ -617,7 +613,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -689,7 +684,6 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "-";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -725,14 +719,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Ejector/Ejector.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Ejector/EJEInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.Ejector;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.Ejector2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
 			};
 			name = Debug;
 		};
@@ -740,14 +731,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Ejector/Ejector.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = Ejector/EJEInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.Ejector;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.Ejector2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
 			};
 			name = Release;
 		};
@@ -794,14 +782,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = EjectorLoginItem/EjectorLoginItem.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = EjectorLoginItem/ELIInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.EjectorLoginItem;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.EjectorLoginItem2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -812,14 +797,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_ENTITLEMENTS = EjectorLoginItem/EjectorLoginItem.entitlements;
-				CODE_SIGN_IDENTITY = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = EjectorLoginItem/ELIInfo.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.EjectorLoginItem;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.lundie.EjectorLoginItem2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "c8f44069-21de-4e6d-b433-bb2b2a05b441";
 				SKIP_INSTALL = YES;
 			};
 			name = Release;

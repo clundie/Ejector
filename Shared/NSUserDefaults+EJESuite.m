@@ -16,7 +16,7 @@ static NSUserDefaults *_sharedInstance;
 {
   static dispatch_once_t onceToken;
   dispatch_once(&onceToken, ^{
-    _sharedInstance = [[NSUserDefaults alloc] initWithSuiteName:@"LFZPMJ2CPK.ca.lundie.Ejector"];
+    _sharedInstance = [[NSUserDefaults alloc] initWithSuiteName:@"ca.lundie.suite.Ejector2"];
     [_sharedInstance registerDefaults:@{
       @"LoginItemEnabled": @(NO),
       @"NotificationsEnabled": @(YES),

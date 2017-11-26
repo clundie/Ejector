@@ -23,7 +23,7 @@ static void setLoginItemEnabled(BOOL isEnabled);
 static BOOL shouldEnableLoginItem(NSUserDefaultsController *controller);
 
 static void setLoginItemEnabled(BOOL isEnabled) {
-  SMLoginItemSetEnabled(CFSTR("ca.lundie.EjectorLoginItem"), isEnabled ? true : false);
+  SMLoginItemSetEnabled(CFSTR("ca.lundie.EjectorLoginItem2"), isEnabled ? true : false);
 }
 
 static BOOL shouldEnableLoginItem(NSUserDefaultsController *controller) {
@@ -44,7 +44,7 @@ static BOOL shouldEnableLoginItem(NSUserDefaultsController *controller) {
 
     [controller cdl_observeKeyPaths:@[@"values.NotificationsEnabled", @"values.LoginItemEnabled",] options:0 block:^(NSString * _Nullable _, NSDictionary<NSString *,id> * _Nullable change) {
       [[controller defaults] synchronize];
-      [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"ca.lundie.Ejector.DefaultsChanged" object:@"ca.lundie.Ejector"];
+      [[NSDistributedNotificationCenter defaultCenter] postNotificationName:@"ca.lundie.Ejector2.DefaultsChanged" object:@"ca.lundie.Ejector2"];
     }],
   ];
   return self;

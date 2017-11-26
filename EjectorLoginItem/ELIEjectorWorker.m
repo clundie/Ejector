@@ -146,7 +146,7 @@ static void notify(NSArray<NSError *> *errors) {
   NSUserNotification *notification = [[NSUserNotification alloc] init];
   notification.title = didSucceed ? @"Ejected Time Machine disk" : @"Failed to eject Time Machine disk";
   notification.informativeText = didSucceed ? nil : @"Another app may have an open file on this disk.";
-  notification.identifier = @"ca.lundie.EjectorLoginItem.DefaultNotification";
+  notification.identifier = @"ca.lundie.EjectorLoginItem2.DefaultNotification";
   notification.hasActionButton = NO;
   NSUserNotificationCenter *nc = [NSUserNotificationCenter defaultUserNotificationCenter];
   [nc removeAllDeliveredNotifications];
